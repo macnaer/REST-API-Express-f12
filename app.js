@@ -4,7 +4,7 @@ const express = require("express");
 const RegistrationRouter = require("./routes/usersRouter");
 
 // Import Database
-const db = require("./config/database");
+const db = require("./data/config/database");
 db.authenticate()
 .then(() => console.log("Database conected... "))
 .catch(err => console.log("Connection error => ", err));
