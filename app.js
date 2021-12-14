@@ -3,6 +3,11 @@ const express = require("express");
 // import Routes
 const RegistrationRouter = require("./routes/usersRouter");
 
+// Import Database
+const db = require("./config/database");
+db.authenticate()
+.then(() => console.log("Database conected... "))
+.catch(err => console.log("Connection error => ", err));
 
 const PORT = 5000;
 const app = express();
