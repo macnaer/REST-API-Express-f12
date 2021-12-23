@@ -23,6 +23,7 @@ const App = () => {
         <Router>
           <Routes>  
             <Route path="/admin/dashboard" exact element={<DashBoard />}  />
+            <Route path="/" exact element={<DashBoard />}  />
           </Routes>    
       </Router>
       </ApiStoreServiceProvider>
