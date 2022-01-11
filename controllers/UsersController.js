@@ -1,5 +1,5 @@
 const User = require('../data/models/User');
-const { use } = require('../routes/usersRouter');
+const jwt = require('jsonwebtoken')
 
 exports.getUsers = async(req, res, next) => {
     try {
@@ -11,6 +11,23 @@ exports.getUsers = async(req, res, next) => {
     }
 }
 
+exports.loginUser = async (req, res, next) => {
+    try {
+        console.log("Body", req.body);
+        const user = await User.findOne({where:{Email: req.body.Email, Password: req.body.Password}});
+        console.log("User", user);
+        if (user) {
+            const token = jwt.sign({user}, 'key');
+            res.status(200).json(token);
+        }
+        else {
+            res.status(404).json({message: "User not found"});
+        }
+    } catch (error) {
+        res.status(500).json({message: "Internal server error2"})
+    }
+}
+
 exports.getUserById = async(req, res, next) => {
     try {
         const user = await User.findOne({where:{id: req.params.id}})
@@ -19,7 +36,7 @@ exports.getUserById = async(req, res, next) => {
         }
         res.status(200).json({user});
     } catch (error) {
-        res.status(500).json({message: "Internal server error"})
+        res.status(500).json({message: "Internal server error1"})
     }
 }
 
