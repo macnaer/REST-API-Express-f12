@@ -1,9 +1,3 @@
-
-
-// const DashBoard = (props) => {
-    
-
-
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -30,40 +24,38 @@ import { useSelector, useDispatch } from 'react-redux';
 // Actions
 import { LoadUsers } from '../../Actions/DashBoardActions/DashBoardActions';
 
-   
+//appbar
+import PrimarySearchAppBar from '../AppBar/AppBar'
+
+
 
 const drawerWidth = 240;
 
 function DashBoard(props) {
 
-    console.log("props -> ", props)
-    const { ApiService } = props;
+  console.log("props -> ", props)
+  const { ApiService } = props;
 
-    const { UsersList } = useSelector(store => store.DashboardReducer);
-    const dispatch = useDispatch()
+  const { UsersList } = useSelector(store => store.DashboardReducer);
+  const dispatch = useDispatch()
 
-    console.log("UsersList ", UsersList)
-    
+  console.log("UsersList ", UsersList)
 
-    useEffect(() => {
+  useEffect(() => {
 
-        ApiService.getAllUsers().then(response => {     
-            const  { data } = response;
-            console.log("getAllUsers ", data);
-            dispatch(LoadUsers(data));
-        });
-    },[])
+    ApiService.getAllUsers().then(response => {
+      const { data } = response;
+      console.log("getAllUsers ", data);
+      dispatch(LoadUsers(data));
+    });
+  }, [])
 
-    const user = UsersList.map(item => 
-        <div key={item.Name}>
-            <p>{item.Name}</p>
-            <p>{item.Email}</p>
-        </div>
-    )
-
-
-
-
+  const user = UsersList.map(item =>
+    <div key={item.Name}>
+      <p>{item.Name}</p>
+      <p>{item.Email}</p>
+    </div>
+  )
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -74,6 +66,15 @@ function DashBoard(props) {
 
   const drawer = (
     <div>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% )` },
+          ml: { sm: `${drawerWidth}px` },
+        }}
+      >
+        <PrimarySearchAppBar />
+      </AppBar>
       <Toolbar />
       <Divider />
       <List>
@@ -105,39 +106,17 @@ function DashBoard(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
+
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -153,6 +132,7 @@ function DashBoard(props) {
           sx={{
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+
           }}
           open
         >
@@ -165,8 +145,8 @@ function DashBoard(props) {
       >
         <Toolbar />
         <Typography paragraph>
-            <h1>Dashboard</h1>
-            {user}         
+          <h1>Dashboard</h1>
+          {user}
         </Typography>
       </Box>
     </Box>
@@ -174,11 +154,7 @@ function DashBoard(props) {
 }
 
 DashBoard.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
+  window: PropTypes.func
 };
 
 export default WithApiService()(DashBoard);
