@@ -9,6 +9,7 @@ import store from "./store";
 
 // Componnents
 import DashBoard from './Components/Dashboard/Dashboard';
+import Registration from './Components/Registration/Registration'
 
 // Hoc ApiService
 import ApiService from './Services/ApiService';
@@ -24,6 +25,7 @@ const App = () => {
           <Routes>  
             <Route path="/admin/dashboard" exact element={<DashBoard />}  />
             <Route path="/" exact element={<DashBoard />}  />
+            <Route path="/register" element={<Registration />} />
           </Routes>    
       </Router>
       </ApiStoreServiceProvider>
