@@ -13,9 +13,7 @@ exports.getUsers = async(req, res, next) => {
 
 exports.loginUser = async (req, res, next) => {
     try {
-        console.log("Body", req.body);
         const user = await User.findOne({where:{Email: req.body.Email, Password: req.body.Password}});
-        console.log("User", user);
         if (user) {
             const token = jwt.sign({user}, 'key');
             res.status(200).json(token);
@@ -24,7 +22,7 @@ exports.loginUser = async (req, res, next) => {
             res.status(404).json({message: "User not found"});
         }
     } catch (error) {
-        res.status(500).json({message: "Internal server error2"})
+        res.status(500).json({message: "Internal server error"})
     }
 }
 
@@ -36,7 +34,7 @@ exports.getUserById = async(req, res, next) => {
         }
         res.status(200).json({user});
     } catch (error) {
-        res.status(500).json({message: "Internal server error1"})
+        res.status(500).json({message: "Internal server error"})
     }
 }
 
