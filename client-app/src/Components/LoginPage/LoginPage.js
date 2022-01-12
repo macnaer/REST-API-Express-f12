@@ -4,16 +4,18 @@ import Button from 'react-bootstrap/Button';
 import {validationSchema} from './validation';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { loginUser } from './actionLogin';
+// Import actions
+import { loginUser } from './actionLogin'
+
 import { useSelector, useDispatch } from 'react-redux';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+  
+  const { ApiService } = props;
+  const {userLogined} = useSelector(store => store.loginReduser)
 
     const navigate = useNavigate()
   
-
-
-
     const onSubmit = () => {
         console.log(formik.values);
         navigate('/');
@@ -57,7 +59,7 @@ const LoginPage = () => {
         />
         <div className="row d-flex justify-content-around">
             <Button type='submit' variant="secondary col-4">Login</Button>
-       <Link class="btn btn-secondary col-4" to='/'>Back to Main</Link>
+       <Link className="btn btn-secondary col-4" to='/'>Back to Main</Link>
         </div>
        
         </form>
