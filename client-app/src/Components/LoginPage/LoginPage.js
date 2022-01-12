@@ -1,69 +1,91 @@
-import InputGroup from '../Containers/InputGroup'
-import { useFormik } from "formik";
-import Button from 'react-bootstrap/Button';
-import {validationSchema} from './validation';
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import { loginUser } from './actionLogin';
-import { useSelector, useDispatch } from 'react-redux';
+import InputGroup from "../Containers/InputGroup";
+import { useFormik, Form, FormikProvider } from "formik";
+import Button from "react-bootstrap/Button";
+import { validationSchema } from "./validation";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { WithApiService } from "../Hoc/With-api-service";
+import jwt from "jsonwebtoken";
+// Import actions
+import { loginUserAction } from "./actionLogin";
 
-const LoginPage = () => {
+import { useSelector, useDispatch } from "react-redux";
 
-    const navigate = useNavigate()
-  
+const LoginPage = (props) => {
+  // const userLogined = useSelector((store) => store.loginReduser);
 
+  const { ApiService } = props;
 
+  const dispatch = useDispatch();
 
-    const onSubmit = () => {
-        console.log(formik.values);
-        navigate('/');
-    }
+  const navigate = useNavigate();
 
-    const initialValues = {
-        login: '',
-        password: ''
-    }
-    const formik = useFormik({
-        validationSchema,
-        initialValues,
-        onSubmit,
-        validateOnBlur: true,
-      });
+  const onSubmit = async () => {
+    ApiService.loginUser(values).then((response) => {
+      const { data } = response;
+      console.log(jwt.decode(data, { json: true }));
+      if (data.message) {
+        setFieldError("Email", data.message);
+        setFieldError("Password", data.message);
+      } else {
+        dispatch(loginUserAction());
+        navigate("/");
+      }
+    });
+  };
 
-    return <div className="container">
-        <h1>Login</h1>
-        <div className="row">
+  const initialValues = {
+    Email: "",
+    Password: "",
+  };
+  const formik = useFormik({
+    validationSchema,
+    initialValues,
+    onSubmit,
+  });
+
+  const { touched, errors, values, handleChange, handleSubmit, setFieldError } =
+    formik;
+
+  return (
+    <div className="container">
+      <h1>Login</h1>
+      <div className="row">
         <div className="col-4"></div>
-        <form onSubmit={(e) => formik.handleSubmit(e)} className="col-4">
-        <InputGroup
-          field="login"
-          label="Login"
-          type="text"
-          touched={formik.touched.login}
-          error={formik.errors.login}
-          value={formik.values.login}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        <InputGroup
-          field="password"
-          label="Password"
-          type="password"
-          touched={formik.touched.password}
-          error={formik.errors.password}
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        <div className="row d-flex justify-content-around">
-            <Button type='submit' variant="secondary col-4">Login</Button>
-       <Link class="btn btn-secondary col-4" to='/'>Back to Main</Link>
-        </div>
-       
-        </form>
+        <FormikProvider value={formik}>
+          <Form onSubmit={handleSubmit} className="col-4">
+            <InputGroup
+              field="Email"
+              label="Email"
+              type="text"
+              touched={touched.Email}
+              error={errors.Email}
+              value={values.Email}
+              onChange={handleChange}
+            />
+            <InputGroup
+              field="Password"
+              label="Password"
+              type="password"
+              touched={touched.Password}
+              error={errors.Password}
+              value={values.Password}
+              onChange={handleChange}
+            />
+            <div className="row d-flex justify-content-around">
+              <Button type="submit" variant="secondary col-4">
+                Login
+              </Button>
+              <Link className="btn btn-secondary col-4" to="/">
+                Back to Main
+              </Link>
+            </div>
+          </Form>
+        </FormikProvider>
         <div className="col-4"></div>
-        </div>
+      </div>
     </div>
-}
+  );
+};
 
-export default LoginPage
+export default WithApiService()(LoginPage);
