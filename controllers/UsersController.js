@@ -89,11 +89,16 @@ exports.updatePassword = async(req,res,next) => {
         if(!user){
             res.status(404).json({message: "User not found"})
         }
-        if(req.body.OldPassword !== user.Password){
-            res.status(400).json({message: "Invalid password"})
+        if (bcrypt.compareSync(req.body.Password, user.Password)) {
+          res.status(400).json({ message: "Invalid password" });
         }
-        if(!await User.update({Password: req.body.Password}, {where:{id: req.params.id}})){
-            res.status(404).json({message: "User not found"})
+        if (
+          !(await User.update(
+            { Password: bcrypt.hashSync(req.body.Password, salt) },
+            { where: { id: req.params.id } }
+          ))
+        ) {
+          res.status(404).json({ message: "User not found" });
         }
         res.status(200).json({message: "Password updated"})
     } catch (error) {
