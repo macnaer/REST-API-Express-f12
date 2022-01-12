@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // Store 
 import { Provider } from 'react-redux';
@@ -10,11 +12,13 @@ import store from "./store";
 // Componnents
 import DashBoard from './Components/Dashboard/Dashboard';
 import Registration from './Components/Registration/Registration'
+import LoginPage from './Components/LoginPage/LoginPage';
 
 // Hoc ApiService
 import ApiService from './Services/ApiService';
 import { ApiStoreServiceProvider } from './Components/Api-service-context/Api-service-context';
 const apiService = new ApiService();
+
 
 
 const App = () => {
@@ -26,6 +30,7 @@ const App = () => {
             <Route path="/admin/dashboard" exact element={<DashBoard />}  />
             <Route path="/" exact element={<DashBoard />}  />
             <Route path="/register" element={<Registration />} />
+            <Route path="/login"  element={<LoginPage />} />
           </Routes>    
       </Router>
       </ApiStoreServiceProvider>

@@ -6,3 +6,4 @@ module.exports = Config = {
   DATABASE_PORT: 1433,
   DATABASE_DIALECT: "mssql",
 };
+
