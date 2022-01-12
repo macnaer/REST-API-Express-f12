@@ -19,7 +19,6 @@ const DashBoard = (props) => {
     
 
     useEffect(() => {
-
         ApiService.getAllUsers().then(response => {     
             const  { data } = response;
             console.log("getAllUsers ", data);

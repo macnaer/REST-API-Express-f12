@@ -13,7 +13,8 @@ const requests = {
 }
 
 const User = {
-    getAllUsers: () => requests.get("/users/")
+    getAllUsers: () => requests.get("/users/"),
+    loginUser: (test) => requests.post('/users/login', test)
 }
 
 export default class ApiService{
@@ -25,5 +26,16 @@ export default class ApiService{
             return error.response;
         })
         return data;
+    };
+
+    async loginUser(userData){
+        const data = await User.loginUser(userData)
+        .then(response => {
+            return {data: response}
+        }).catch(error => {
+            return error.response;
+        })
+        return data;
     }
+    
 }
