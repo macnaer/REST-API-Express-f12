@@ -13,7 +13,7 @@ const User  = db.define('Users', {
     Email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: trueтзь кгт вум
+        unique: true
     },
     Password: {
         type: Sequelize.STRING,
