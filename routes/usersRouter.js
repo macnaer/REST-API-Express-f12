@@ -10,7 +10,7 @@ router.get("/:id", getUserById)
 router.post("/", createUser);
 router.delete('/:id', deleteUser)
 router.put('/', updateUser)
-router.put('/:id/updatePassword/', updatePassword)
+router.put('/updatePassword', updatePassword)
 router.post('/login', loginUser)
 
 module.exports = router;

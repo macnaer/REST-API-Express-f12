@@ -82,20 +82,20 @@ exports.updateUser = async(req,res,next) => {
 }
 
 exports.updatePassword = async(req,res,next) => {
-    console.log("updatePassword => params ", req.params)
     console.log("updatePassword => body ", req.body)
     try {
-        const user = await User.findOne({where:{id: req.params.id}})
+        const user = await User.findOne({where:{id: req.body.id}})
         if(!user){
             res.status(404).json({message: "User not found"})
         }
+        console.log("ADs", bcrypt.compareSync(req.body.Password, user.Password));
         if (bcrypt.compareSync(req.body.Password, user.Password)) {
           res.status(400).json({ message: "Invalid password" });
         }
         if (
           !(await User.update(
-            { Password: bcrypt.hashSync(req.body.Password, salt) },
-            { where: { id: req.params.id } }
+            { Password: bcrypt.hashSync(req.body.newPassword, salt) },
+            { where: { id: req.body.id } }
           ))
         ) {
           res.status(404).json({ message: "User not found" });
