@@ -17,8 +17,8 @@ exports.loginUser = async (req, res, next) => {
     try {
         const user = await User.findOne({ where: { Email: req.body.Email}});
         if (user && bcrypt.compareSync(req.body.Password, user.Password)) {
-          const { id, Name, Surname, Email } = user;
-          const token = jwt.sign({ id, Name, Surname, Email }, "key");
+          const { id, Name, Surname, Email, Role } = user;
+          const token = jwt.sign({ id, Name, Surname, Email, Role }, "key");
           res.status(200).json(token);
         } else {
           res.status(404).json({ message: "User not found" });
@@ -41,7 +41,8 @@ exports.getUserById = async(req, res, next) => {
 }
 
 exports.createUser = async (req, res, next) => {
-  const { Name, Surname, Email, Password } = req.body;
+  const { Name, Surname, Email, Password, Role } = req.body;
+  console.log(Role)
   try {
     let user = await User.findOne({ where: { Email } });
     if (user) {
@@ -51,6 +52,7 @@ exports.createUser = async (req, res, next) => {
         Name,
         Surname,
         Email,
+        Role,
         Password: bcrypt.hashSync(Password, salt),
       });
       await user.save();
