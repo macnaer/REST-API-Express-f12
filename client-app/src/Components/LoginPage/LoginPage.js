@@ -9,12 +9,9 @@ import jwt from "jsonwebtoken";
 // Import actions
 import { loginUserAction } from "./actionLogin";
 
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 
 const LoginPage = (props) => {
-
-
   const { ApiService } = props;
 
   const dispatch = useDispatch();
@@ -24,7 +21,8 @@ const LoginPage = (props) => {
   const onSubmit = async () => {
     ApiService.loginUser(values).then((response) => {
       const { data } = response;
-      console.log(jwt.decode(data, { json: true }));
+      console.log(data);
+      localStorage.setItem("token", data);
       if (data.message) {
         setFieldError("Email", data.message);
         setFieldError("Password", data.message);
@@ -39,6 +37,7 @@ const LoginPage = (props) => {
     Email: "",
     Password: "",
   };
+
   const formik = useFormik({
     validationSchema,
     initialValues,
