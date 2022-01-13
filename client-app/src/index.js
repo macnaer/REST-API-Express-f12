@@ -30,6 +30,7 @@ const App = () => {
       <ApiStoreServiceProvider value={apiService}>
         <BrowserRouter>
           <Routes>
+
             <Route path="/" element={<DefaultLayout />}>
               <Route path="/" exact element={<Main />} />
               <Route path="/login" element={<LoginPage />} />
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/adminPanel" element={<Dashboard />}>
               <Route path="/adminPanel/admin" exact element={<Admin />} />
             </Route>
+            
           </Routes>
         </BrowserRouter>
       </ApiStoreServiceProvider>

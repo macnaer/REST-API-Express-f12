@@ -30,7 +30,7 @@ const LoginPage = (props) => {
         setFieldError("Password", data.message);
       } else {
         dispatch(loginUserAction());
-        navigate("/");
+        navigate("/adminPanel");
       }
     });
   };
