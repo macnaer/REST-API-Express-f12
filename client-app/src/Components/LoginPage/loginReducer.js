@@ -1,17 +1,17 @@
 const initialSate = {
-    userLogin: false,
-}
+  userLogined: false,
+};
 
-const loginReduser = (state= initialSate, action) => {
-    switch(action.type){
-        case "LOGIN_USER":
-            return{
-                ...state,
-                userLogin: true
-            }
-        default:
-            return state;
-    }
-}
+const loginReducer = (state = initialSate, action) => {
+  switch (action.type) {
+    case "LOGIN_USER":
+      return {
+        ...state,
+        userLogined: true,
+      };
+    default:
+      return state;
+  }
+};
 
-export default loginReduser;
+export default loginReducer;
