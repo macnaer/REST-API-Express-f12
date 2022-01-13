@@ -1,5 +1,7 @@
 const User = require('../data/models/User');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+var bcrypt = require("bcryptjs");
+var salt = bcrypt.genSaltSync(10);
 
 exports.getUsers = async(req, res, next) => {
     try {
@@ -13,17 +15,16 @@ exports.getUsers = async(req, res, next) => {
 
 exports.loginUser = async (req, res, next) => {
     try {
-        const user = await User.findOne({where:{Email: req.body.Email, Password: req.body.Password}});
-        if (user) {
-            const { id, Name, Surname, Email } = user;
-            const token = jwt.sign({id, Name, Surname, Email}, 'key');
-            res.status(200).json(token);
-        }
-        else {
-            res.status(404).json({message: "User not found"});
+        const user = await User.findOne({ where: { Email: req.body.Email}});
+        if (user && bcrypt.compareSync(req.body.Password, user.Password)) {
+          const { id, Name, Surname, Email } = user;
+          const token = jwt.sign({ id, Name, Surname, Email }, "key");
+          res.status(200).json(token);
+        } else {
+          res.status(404).json({ message: "User not found" });
         }
     } catch (error) {
-        res.status(500).json({message: "Internal server error"})
+        res.status(500).json({message: "Internal server error1"})
     }
 }
 
@@ -39,25 +40,26 @@ exports.getUserById = async(req, res, next) => {
     }
 }
 
-exports.createUser = async(req, res, next) => {
-    const { Name, Surname, Email, Password } = req.body;
-    try{
-        let user = await User.findOne({where:{Email}});
-        if(user){
-            res.status(400).json({message: "User already exists"});
-        }else{
-            user = new User({
-                Name, Surname,Email, Password
-            });
-            console.log("User => ", user);
-            await user.save();
-            res.status(200).json({message: "User successfully created"})
-        }
+exports.createUser = async (req, res, next) => {
+  const { Name, Surname, Email, Password } = req.body;
+  try {
+    let user = await User.findOne({ where: { Email } });
+    if (user) {
+      res.status(400).json({ message: "User already exists" });
+    } else {
+      user = new User({
+        Name,
+        Surname,
+        Email,
+        Password: bcrypt.hashSync(Password, salt),
+      });
+      await user.save();
+      res.status(200).json({ message: "User successfully created" });
     }
-    catch (error) {
-        res.status(400).json({message: "Bad request"})
-    }
-}
+  } catch (error) {
+    res.status(400).json({ message: "Bad request" });
+  }
+};
 
 exports.updateUser = async(req,res,next) => {
     console.log("Update body ",req.body)
@@ -87,11 +89,16 @@ exports.updatePassword = async(req,res,next) => {
         if(!user){
             res.status(404).json({message: "User not found"})
         }
-        if(req.body.OldPassword !== user.Password){
-            res.status(400).json({message: "Invalid password"})
+        if (bcrypt.compareSync(req.body.Password, user.Password)) {
+          res.status(400).json({ message: "Invalid password" });
         }
-        if(!await User.update({Password: req.body.Password}, {where:{id: req.params.id}})){
-            res.status(404).json({message: "User not found"})
+        if (
+          !(await User.update(
+            { Password: bcrypt.hashSync(req.body.Password, salt) },
+            { where: { id: req.params.id } }
+          ))
+        ) {
+          res.status(404).json({ message: "User not found" });
         }
         res.status(200).json({message: "Password updated"})
     } catch (error) {
