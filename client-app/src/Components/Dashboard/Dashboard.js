@@ -154,7 +154,6 @@ function DashBoard(props) {
     </Box>
   );
 }
-
 DashBoard.propTypes = {
   window: PropTypes.func
 };
