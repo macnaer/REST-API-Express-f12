@@ -17,16 +17,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import { useEffect } from 'react';
-import { WithApiService } from "../Hoc/With-api-service";
+import { WithApiService } from "../../Hoc/With-api-service";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 // Actions
-import { LoadUsers } from "../../Actions/DashBoardActions/DashBoardActions";
+import { LoadUsers } from "../../../Actions/DashBoardActions/DashBoardActions";
 
 //appbar
-import PrimarySearchAppBar from '../AppBar/AppBar'
+import PrimarySearchAppBar from '../../AppBar/AppBar'
 
 
 
@@ -146,9 +146,7 @@ function DashBoard(props) {
       >
         <Toolbar />
         <Typography paragraph>
-          <h1>Dashboard</h1>
-          {user}
-          <Link className="btn btn-secondary" to='/login'>Login</Link>
+          <Outlet />
         </Typography>
       </Box>
     </Box>

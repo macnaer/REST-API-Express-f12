@@ -17,8 +17,8 @@ exports.loginUser = async (req, res, next) => {
     try {
         const user = await User.findOne({ where: { Email: req.body.Email}});
         if (user && bcrypt.compareSync(req.body.Password, user.Password)) {
-          const { id, Name, Surname, Email } = user;
-          const token = jwt.sign({ id, Name, Surname, Email }, "key");
+          const { id, Name, Surname, Email, Role } = user;
+          const token = jwt.sign({ id, Name, Surname, Email, Role }, "key");
           res.status(200).json(token);
         } else {
           res.status(404).json({ message: "User not found" });
@@ -41,7 +41,8 @@ exports.getUserById = async(req, res, next) => {
 }
 
 exports.createUser = async (req, res, next) => {
-  const { Name, Surname, Email, Password } = req.body;
+  const { Name, Surname, Email, Password, Role } = req.body;
+  console.log(Role)
   try {
     let user = await User.findOne({ where: { Email } });
     if (user) {
@@ -51,6 +52,7 @@ exports.createUser = async (req, res, next) => {
         Name,
         Surname,
         Email,
+        Role,
         Password: bcrypt.hashSync(Password, salt),
       });
       await user.save();
@@ -82,20 +84,20 @@ exports.updateUser = async(req,res,next) => {
 }
 
 exports.updatePassword = async(req,res,next) => {
-    console.log("updatePassword => params ", req.params)
     console.log("updatePassword => body ", req.body)
     try {
-        const user = await User.findOne({where:{id: req.params.id}})
+        const user = await User.findOne({where:{id: req.body.id}})
         if(!user){
             res.status(404).json({message: "User not found"})
         }
+        console.log("ADs", bcrypt.compareSync(req.body.Password, user.Password));
         if (bcrypt.compareSync(req.body.Password, user.Password)) {
           res.status(400).json({ message: "Invalid password" });
         }
         if (
           !(await User.update(
-            { Password: bcrypt.hashSync(req.body.Password, salt) },
-            { where: { id: req.params.id } }
+            { Password: bcrypt.hashSync(req.body.newPassword, salt) },
+            { where: { id: req.body.id } }
           ))
         ) {
           res.status(404).json({ message: "User not found" });
