@@ -25,9 +25,14 @@ const LoginPage = (props) => {
         setFieldError("Email", data.message);
         setFieldError("Password", data.message);
       } else {
+<<<<<<< HEAD
       
         dispatch(loginUserAction(jwt.decode(data, { complete: true }).payload));
         navigate("/");
+=======
+        dispatch(loginUserAction());
+        navigate("/adminPanel");
+>>>>>>> DEV
       }
     });
   };

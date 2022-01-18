@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client-app/src/Components/Dashboard/Dashboard.js
 import * as React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -18,15 +19,43 @@ import Typography from "@mui/material/Typography";
 
 import { useEffect } from "react";
 import { WithApiService } from "../Hoc/With-api-service";
+=======
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+import { useEffect } from 'react';
+import { WithApiService } from "../../Hoc/With-api-service";
+>>>>>>> DEV:client-app/src/Components/Containers/Layout/Dashboard.js
 
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 // Actions
-import { LoadUsers } from "../../Actions/DashBoardActions/DashBoardActions";
+import { LoadUsers } from "../../../Actions/DashBoardActions/DashBoardActions";
 
 //appbar
+<<<<<<< HEAD:client-app/src/Components/Dashboard/Dashboard.js
 import PrimarySearchAppBar from "../AppBar/AppBar";
+=======
+import PrimarySearchAppBar from '../../AppBar/AppBar'
+
+
+>>>>>>> DEV:client-app/src/Components/Containers/Layout/Dashboard.js
 
 const drawerWidth = 240;
 
@@ -34,9 +63,14 @@ function DashBoard(props) {
   console.log("props -> ", props);
   const { ApiService } = props;
 
+<<<<<<< HEAD:client-app/src/Components/Dashboard/Dashboard.js
   const { UsersList } = useSelector((store) => store.DashboardReducer);
   const { userProdileInfo } = useSelector((store) => store.loginReducer);
   const { isAuth } = useSelector((store) => store.loginReducer);
+=======
+  const { UsersList } = useSelector((store) => store.dashboard);
+  const dispatch = useDispatch()
+>>>>>>> DEV:client-app/src/Components/Containers/Layout/Dashboard.js
 
   console.log("isAuth => ", isAuth);
 
@@ -156,17 +190,20 @@ function DashBoard(props) {
       >
         <Toolbar />
         <Typography paragraph>
+<<<<<<< HEAD:client-app/src/Components/Dashboard/Dashboard.js
           <h1>Dashboard</h1>
           {user}
           <Link className="btn btn-secondary" to="/login">
             Login
           </Link>
+=======
+          <Outlet />
+>>>>>>> DEV:client-app/src/Components/Containers/Layout/Dashboard.js
         </Typography>
       </Box>
     </Box>
   );
 }
-
 DashBoard.propTypes = {
   window: PropTypes.func,
 };
