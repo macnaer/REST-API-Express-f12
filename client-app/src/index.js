@@ -12,7 +12,6 @@ import { Provider } from 'react-redux';
 import {store} from "./store";
 
 // Componnents
-import DashBoard from './Components/Containers/Layout/Dashboard';
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
@@ -22,6 +21,7 @@ import Admin from "./Components/Admin/index"
 import ApiService from './Services/ApiService';
 import { ApiStoreServiceProvider } from './Components/Api-service-context/Api-service-context';
 import Dashboard from './Components/Containers/Layout/Dashboard';
+import UserList from './Components/UserList/Userlist';
 const apiService = new ApiService();
 
 
@@ -40,6 +40,7 @@ const App = () => {
 
             <Route path="/adminPanel" element={<Dashboard />}>
               <Route path="/adminPanel/admin" exact element={<Admin />} />
+              <Route path="/adminPanel/userList" element={<UserList/>}/>
             </Route>
             
           </Routes>
