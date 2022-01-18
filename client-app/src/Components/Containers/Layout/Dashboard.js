@@ -49,26 +49,26 @@ function DashBoard(props) {
       <Toolbar />
       <Divider />
       <List>
-        {['UserList', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text} onClick={() => {navigate("/adminpanel/userList")}}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          onClick={() => {
+            navigate("/adminpanel/userList");
+          }}
+        >
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary={"UserList"} />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => {
+            navigate("/adminpanel");
+          }}
+        >
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary={"UserList"} />
+        </ListItem>
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
