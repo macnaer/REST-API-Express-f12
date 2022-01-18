@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 // Import actions
 import { loginUserAction } from "./actionLogin";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 const LoginPage = (props) => {

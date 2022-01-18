@@ -11,7 +11,6 @@ import { Provider } from 'react-redux';
 import {store} from "./store";
 
 // Componnents
-import DashBoard from './Components/Containers/Layout/Dashboard';
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";

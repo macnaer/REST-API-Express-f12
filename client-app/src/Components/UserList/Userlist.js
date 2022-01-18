@@ -1,8 +1,20 @@
-import { useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import UserItem from './userItem';
+import { WithApiService } from "../Hoc/With-api-service";
+import { LoadUsers } from "../../Actions/DashBoardActions/DashBoardActions";
 
-const UserList = () => {
+const UserList = (props) => {
   const { UsersList } = useSelector((store) => store.dashboard);
+  const { ApiService } = props;
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+      ApiService.getAllUsers().then((response) => {
+        const { data } = response;
+        dispatch(LoadUsers(data));
+      });
+    }, [ApiService, dispatch]);
 
   return (
     <>
@@ -26,4 +38,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default WithApiService()(UserList);
