@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Store 
 import { Provider } from 'react-redux';
-import store from "./store";
+import {store} from "./store";
 
 // Componnents
 import DashBoard from './Components/Containers/Layout/Dashboard';

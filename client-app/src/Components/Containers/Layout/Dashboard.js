@@ -37,7 +37,7 @@ function DashBoard(props) {
   console.log("props -> ", props)
   const { ApiService } = props;
 
-  const { UsersList } = useSelector(store => store.DashboardReducer);
+  const { UsersList } = useSelector((store) => store.dashboard);
   const dispatch = useDispatch()
 
   console.log("UsersList ", UsersList)
