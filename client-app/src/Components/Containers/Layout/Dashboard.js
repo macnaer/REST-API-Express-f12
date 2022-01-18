@@ -20,7 +20,7 @@ import { useEffect } from 'react';
 import { WithApiService } from "../../Hoc/With-api-service";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 // Actions
 import { LoadUsers } from "../../../Actions/DashBoardActions/DashBoardActions";
@@ -34,6 +34,8 @@ const drawerWidth = 240;
 
 function DashBoard(props) {
 
+
+  const navigate = useNavigate();
   console.log("props -> ", props)
   const { ApiService } = props;
 
@@ -79,8 +81,8 @@ function DashBoard(props) {
       <Toolbar />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
+        {['UserList', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text} onClick={() => {navigate("/adminpanel/userList")}}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>

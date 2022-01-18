@@ -21,6 +21,7 @@ import Admin from "./Components/Admin/index"
 import ApiService from './Services/ApiService';
 import { ApiStoreServiceProvider } from './Components/Api-service-context/Api-service-context';
 import Dashboard from './Components/Containers/Layout/Dashboard';
+import UserList from './Components/UserList/Userlist';
 const apiService = new ApiService();
 
 
@@ -38,6 +39,7 @@ const App = () => {
 
             <Route path="/adminPanel" element={<Dashboard />}>
               <Route path="/adminPanel/admin" exact element={<Admin />} />
+              <Route path="/adminPanel/userList" element={<UserList/>}/>
             </Route>
             
           </Routes>
