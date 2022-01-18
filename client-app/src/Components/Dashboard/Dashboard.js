@@ -12,8 +12,13 @@ const DashBoard = (props) => {
   const { ApiService } = props;
 
   const { UsersList } = useSelector((store) => store.DashboardReducer);
-  const userLogined = useSelector((store) => store.loginReduser);
-  console.log("logined => ", userLogined);
+
+  const { isAuth } = useSelector((store) => store.loginReducer);
+  
+
+  console.log("isAuth => ", isAuth);
+  console.log("userProdileInfo => ", userProdileInfo);
+
   const dispatch = useDispatch();
 
   console.log("UsersList ", UsersList);

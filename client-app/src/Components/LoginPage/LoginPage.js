@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { WithApiService } from "../Hoc/With-api-service";
 import jwt from "jsonwebtoken";
 // Import actions
-import { loginUserAction } from "./actionLogin";
+import { loginUserAction } from "../../Actions/loginUserUactions/loginUserAction";
 
 import { useDispatch } from "react-redux";
 
@@ -15,19 +15,18 @@ const LoginPage = (props) => {
   const { ApiService } = props;
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const onSubmit = async () => {
     ApiService.loginUser(values).then((response) => {
       const { data } = response;
-      console.log(data);
       localStorage.setItem("token", data);
       if (data.message) {
         setFieldError("Email", data.message);
         setFieldError("Password", data.message);
       } else {
-        dispatch(loginUserAction());
+      
+        dispatch(loginUserAction(jwt.decode(data, { complete: true }).payload));
         navigate("/");
       }
     });
