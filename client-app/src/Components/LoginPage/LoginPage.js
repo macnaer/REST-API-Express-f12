@@ -9,10 +9,11 @@ import jwt from "jsonwebtoken";
 // Import actions
 import { loginUserAction } from "./actionLogin";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 const LoginPage = (props) => {
-  // const userLogined = useSelector((store) => store.loginReduser);
+
 
   const { ApiService } = props;
 
@@ -29,7 +30,7 @@ const LoginPage = (props) => {
         setFieldError("Password", data.message);
       } else {
         dispatch(loginUserAction());
-        navigate("/");
+        navigate("/adminPanel");
       }
     });
   };
