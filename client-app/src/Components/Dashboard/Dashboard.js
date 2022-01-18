@@ -35,11 +35,10 @@ function DashBoard(props) {
   const { ApiService } = props;
 
   const { UsersList } = useSelector((store) => store.DashboardReducer);
-
+  const { userProdileInfo } = useSelector((store) => store.loginReducer);
   const { isAuth } = useSelector((store) => store.loginReducer);
 
   console.log("isAuth => ", isAuth);
-  console.log("userProdileInfo => ", userProdileInfo);
 
   const dispatch = useDispatch();
 
