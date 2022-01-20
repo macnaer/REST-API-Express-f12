@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Routes } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,20 +11,13 @@ import { Provider } from 'react-redux';
 import {store} from "./store";
 
 // Componnents
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 import DashBoard from './Components/Containers/Layout/Dashboard';
-=======
-import DashBoard from './Components/Dashboard/Dashboard';
+// import DashBoard from './Components/Dashboard/Dashboard';
 import Registration from './Components/Registration/Registration'
->>>>>>> registration
->>>>>>> DEV
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
 import Admin from "./Components/Admin/index"
-import Registration from "./Components/Registration/Registration"
 
 // Hoc ApiService
 import ApiService from './Services/ApiService';
@@ -38,10 +31,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <ApiStoreServiceProvider value={apiService}>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> DEV
         <BrowserRouter>
           <Routes>
 
@@ -58,9 +47,6 @@ const App = () => {
             
           </Routes>
         </BrowserRouter>
-<<<<<<< HEAD
-=======
-=======
         <Router>
           <Routes>  
             <Route path="/admin/dashboard" exact element={<DashBoard />}  />
@@ -69,8 +55,6 @@ const App = () => {
             <Route path="/login"  element={<LoginPage />} />
           </Routes>    
       </Router>
->>>>>>> registration
->>>>>>> DEV
       </ApiStoreServiceProvider>
     </Provider>
   );
