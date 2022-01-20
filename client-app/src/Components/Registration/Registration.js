@@ -138,8 +138,8 @@ const Registration = () => {
                     label="Roles"
                     onChange={handleChange}
                   >
-                    <MenuItem value={'Developer'}>Developer</MenuItem>
-                    <MenuItem value={'Administrator'}>Administrator</MenuItem>
+                    <MenuItem value={'admin'}>admin</MenuItem>
+                    <MenuItem value={'user'}>user</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
