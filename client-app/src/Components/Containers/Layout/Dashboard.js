@@ -20,8 +20,6 @@ import {  Outlet, useNavigate } from "react-router-dom";
 
 import PrimarySearchAppBar from '../../AppBar/AppBar'
 
-
-
 const drawerWidth = 240;
 
 function DashBoard(props) {
@@ -72,10 +70,11 @@ function DashBoard(props) {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Box
         component="nav"
@@ -87,13 +86,15 @@ function DashBoard(props) {
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
-
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -101,9 +102,11 @@ function DashBoard(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
           open
         >
@@ -112,7 +115,11 @@ function DashBoard(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
       >
         <Toolbar />
         <Typography paragraph>
@@ -123,7 +130,7 @@ function DashBoard(props) {
   );
 }
 DashBoard.propTypes = {
-  window: PropTypes.func
+  window: PropTypes.func,
 };
 
 export default WithApiService()(DashBoard);

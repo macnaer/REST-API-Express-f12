@@ -1,5 +1,8 @@
 import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
+
+
 
 const ProfilePage = () => {
   const { userProdileInfo } = useSelector((store) => store.login);
@@ -18,11 +21,13 @@ const ProfilePage = () => {
           <div className="text-center">
             <span className="fw-bold">Email:</span> {userProdileInfo.Email}
           </div>
+
           <div className="text-center">
             <Link class="btn btn-secondary" to="/adminPanel/editProfile">
               Edit Profile
             </Link>
           </div>
+
         </div>
       </div>
       <div className="col-4"></div>
