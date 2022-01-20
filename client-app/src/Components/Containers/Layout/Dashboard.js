@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 
 import { WithApiService } from "../../Hoc/With-api-service";
 
-import {  Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import PrimarySearchAppBar from '../../AppBar/AppBar'
 
@@ -61,11 +61,11 @@ function DashBoard(props) {
         <ListItem
           button
           onClick={() => {
-            navigate("/adminpanel");
+            navigate("/adminpanel/register");
           }}
         >
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary={"UserList"} />
+          <ListItemText primary={"Create User"} />
         </ListItem>
       </List>
       <Divider />

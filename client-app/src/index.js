@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Store 
 import { Provider } from 'react-redux';
-import {store} from "./store";
+import { store } from "./store";
 
 // Componnents
 import LoginPage from './Components/LoginPage/LoginPage';
@@ -39,10 +39,10 @@ const App = () => {
 
             <Route path="/adminPanel" element={<Dashboard />}>
               <Route path="/adminPanel/admin" exact element={<Admin />} />
-              <Route path="/adminPanel/userList" element={<UserList/>}/>
-               <Route path="/adminPanel/register" element={<Registration/>}/>
+              <Route path="/adminPanel/userList" element={<UserList />} />
+              <Route path="/adminPanel/register" element={<Registration />} />
             </Route>
-            
+
           </Routes>
         </BrowserRouter>
       </ApiStoreServiceProvider>
