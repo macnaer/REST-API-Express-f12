@@ -1,13 +1,16 @@
 const initialSate = {
-  userLogined: false,
+  isAuth: false,
+  userProdileInfo: null,
 };
 
 const loginReducer = (state = initialSate, action) => {
+  console.log('with reducer => ' ,action.payload);
   switch (action.type) {
     case "LOGIN_USER":
       return {
         ...state,
-        userLogined: true,
+        isAuth: true,
+        userProdileInfo: action.payload,
       };
     default:
       return state;
