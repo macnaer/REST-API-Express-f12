@@ -3,18 +3,21 @@ import { useFormik, Form, FormikProvider } from "formik";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { validationSchema } from "./validation";
+import { useSelector } from "react-redux";
 
 
 const EditProfile =()=>{
+
+const { userProdileInfo } = useSelector((store) => store.login);
 
 const onSubmit = ()=> {
     console.log(values)
 }
 
  const initialValues = {
-    Name:"",
-    Surname:"",
-    Email: "",
+    Name: userProdileInfo.Name,
+    Surname: userProdileInfo.Surname,
+    Email: userProdileInfo.Email,
   };
 
 const formik = useFormik({
