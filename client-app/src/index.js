@@ -13,10 +13,7 @@ import { store } from "./store";
 import LoginPage from "./Components/LoginPage/LoginPage";
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
-
 import Admin from "./Components/Admin/index";
-import Registration from "./Components/Registration/Registration";
-
 import ProfilePage from "./Components/Profile/ProfilePage";
 
 // Hoc ApiService
@@ -27,6 +24,9 @@ import UserList from "./Components/UserList/Userlist";
 const apiService = new ApiService();
 
 const App = () => {
+  
+  
+
   return (
     <Provider store={store}>
       <ApiStoreServiceProvider value={apiService}>
