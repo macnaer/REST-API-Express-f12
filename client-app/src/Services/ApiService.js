@@ -15,7 +15,7 @@ const requests = {
 const User = {
   getAllUsers: () => requests.get("/users/"),
   loginUser: (test) => requests.post("/users/login", test),
-  createUser: (user) => requests.post(`/users/`, user)
+  createUser: (user) => requests.post(`/users/create-user`, user)
 };
 
 export default class ApiService {

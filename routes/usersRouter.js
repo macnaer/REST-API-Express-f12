@@ -7,7 +7,7 @@ const { getUsers, createUser, getUserById, deleteUser, updateUser, updatePasswor
 
 router.get("/", getUsers);
 router.get("/:id", getUserById)
-router.post("/", createUser);
+router.post("/create-user", createUser);
 router.delete('/:id', deleteUser)
 router.put('/', updateUser)
 router.put('/updatePassword', updatePassword)

@@ -14,4 +14,5 @@ export const validationSchema = yup.object({
     Password2: yup
         .string()
         .required('Please Enter your new password').oneOf([yup.ref("Password"), null], "Passwords must match"),
+    Role: yup.string().required("Required"),
 })

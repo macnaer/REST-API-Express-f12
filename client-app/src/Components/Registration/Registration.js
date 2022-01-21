@@ -18,6 +18,9 @@ import { versionsByValue } from "tedious/lib/tds-versions";
 import ApiService from "../../Services/ApiService";
 import { SliderValueLabelUnstyled } from "@mui/material";
 
+import { WithApiService } from "../Hoc/With-api-service";
+
+
 
 const styles = {
   marTop: {
@@ -26,8 +29,9 @@ const styles = {
 }
 const useStyles = makeStyles(styles);
 
-const Registration = () => {
+const Registration = (props) => {
   const classes = useStyles();
+  const { ApiService } = props;
 
 
 
@@ -38,30 +42,33 @@ const Registration = () => {
     Email: "",
     Password: "",
     Password2: "",
-    role: ""
+    Role: ""
   };
 
-  const onSubmit = (values, props) => {
 
-    const { Name, Surname, Email, Password, role } = values;
-    console.log(values)
-    // ApiService.register(UserData).then(result => {
-    //   const { data, status } = result;
-    //   if (status != undefined && status === 400) {
-    //     console.log(data)
-    //   }
-    //   else {
-    //     data = new User({
-    //       Name,
-    //       Surname,
-    //       Email,
-    //       Role,
-    //       Password: bcrypt.hashSync(Password, salt),
-    //     });
-    //     console.log(status)
-    //   };
 
-    // })
+  const onSubmit = (values) => {
+
+
+    const user = {
+      Name: values.Name,
+      Surname: values.Surname,
+      Email: values.Email,
+      Role: values.Role,
+      Password: values.Password
+    }
+    console.log(user)
+
+    ApiService.register(user).then(res => {
+      console.log('respons', res)
+      const { data, status } = res
+      if (status != undefined && status === 400) {
+        console.log(data);
+      }
+      else {
+        console.log("Profile successfully created")
+      }
+    })
   }
 
   const formik = useFormik({
@@ -89,6 +96,7 @@ const Registration = () => {
                 error={errors.Name}
                 value={values.Name}
                 onChange={handleChange}
+                fullWidth
               />
               <InputGroup
                 field="Surname"
@@ -98,6 +106,7 @@ const Registration = () => {
                 error={errors.Surname}
                 value={values.Surname}
                 onChange={handleChange}
+                fullWidth
               />
               <InputGroup
                 field="Email"
@@ -107,6 +116,7 @@ const Registration = () => {
                 error={errors.Email}
                 value={values.Email}
                 onChange={handleChange}
+                fullWidth
               />
               <InputGroup
                 field="Password"
@@ -116,6 +126,7 @@ const Registration = () => {
                 error={errors.Password}
                 value={values.Password}
                 onChange={handleChange}
+                fullWidth
               />
 
               <InputGroup
@@ -126,6 +137,7 @@ const Registration = () => {
                 error={errors.Password2}
                 value={values.Password2}
                 onChange={handleChange}
+                fullWidth
               />
               <Box sx={{ minWidth: 120 }} className={classes.forSelect}>
                 <FormControl fullWidth>
@@ -133,10 +145,13 @@ const Registration = () => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="role"
-                    value={values.role}
-                    name="role"
+                    value={values.Role}
+                    name="Role"
                     label="Roles"
+                    touched={touched.Role}
+                    error={errors.Role}
                     onChange={handleChange}
+                    fullWidth
                   >
                     <MenuItem value={'admin'}>admin</MenuItem>
                     <MenuItem value={'user'}>user</MenuItem>
@@ -160,4 +175,4 @@ const Registration = () => {
 };
 
 
-export default Registration;
+export default WithApiService()(Registration);
