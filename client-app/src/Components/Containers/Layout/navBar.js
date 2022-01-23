@@ -8,9 +8,9 @@ const Header = () => {
       <div className="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <Link class="navbar-brand" to="/">
               Navbar
-            </a>
+            </Link>
             <button
               class="navbar-toggler"
               type="button"

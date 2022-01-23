@@ -88,21 +88,21 @@ exports.updatePassword = async(req,res,next) => {
     try {
         const user = await User.findOne({where:{id: req.body.id}})
         if(!user){
-            res.status(404).json({message: "User not found"})
+            return res.status(404).json({message: "User not found"})
         }
-        console.log("ADs", bcrypt.compareSync(req.body.Password, user.Password));
-        if (bcrypt.compareSync(req.body.Password, user.Password)) {
-          res.status(400).json({ message: "Invalid password" });
+        console.log("compare", bcrypt.compareSync(req.body.Password, user.Password));
+        if (!bcrypt.compareSync(req.body.Password, user.Password)) {
+          return res.status(400).json({ message: "Invalid password" });
         }
         if (
           !(await User.update(
-            { Password: bcrypt.hashSync(req.body.newPassword, salt) },
+            { ...User, Password: bcrypt.hashSync(req.body.newPassword, salt) },
             { where: { id: req.body.id } }
           ))
         ) {
-          res.status(404).json({ message: "User not found" });
+          return res.status(404).json({ message: "User not found" });
         }
-        res.status(200).json({message: "Password updated"})
+        return res.status(200).json({message: "Password updated"})
     } catch (error) {
         res.status(500).json({message: "Internal server error"})
     }
