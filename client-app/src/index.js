@@ -13,10 +13,21 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 
 // Componnents
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> DEV
 import DashBoard from './Components/Containers/Layout/Dashboard';
 // import DashBoard from './Components/Dashboard/Dashboard';
 import Registration from './Components/Registration/Registration'
 import LoginPage from './Components/LoginPage/LoginPage';
+<<<<<<< HEAD
+=======
+=======
+import LoginPage from "./Components/LoginPage/LoginPage";
+>>>>>>> 8622ad5f091fab0529aa60578d00043270384c64
+>>>>>>> DEV
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
 import Admin from "./Components/Admin/index"
@@ -38,6 +49,13 @@ const App = () => {
   return (
     <Provider store={store}>
       <ApiStoreServiceProvider value={apiService}>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8622ad5f091fab0529aa60578d00043270384c64
+>>>>>>> DEV
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<DefaultLayout />}>
@@ -60,6 +78,11 @@ const App = () => {
             </Route>
           </Routes>
         </BrowserRouter>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> DEV
         <Router>
           <Routes>  
             <Route path="/admin/dashboard" exact element={<DashBoard />}  />
@@ -68,6 +91,12 @@ const App = () => {
             <Route path="/login"  element={<LoginPage />} />
           </Routes>    
       </Router>
+<<<<<<< HEAD
+=======
+>>>>>>> registration
+=======
+>>>>>>> 8622ad5f091fab0529aa60578d00043270384c64
+>>>>>>> DEV
       </ApiStoreServiceProvider>
     </Provider>
   );
