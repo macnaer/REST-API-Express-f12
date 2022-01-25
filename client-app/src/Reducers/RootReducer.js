@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import DashboardReducer from "./DashboardReducer";
-import loginReducer from "../Components/LoginPage/loginReducer";
+import loginReducer from "./loginReducer";
 
 export default combineReducers({
-    DashboardReducer,
-    loginReducer
-})
+  dashboard: DashboardReducer,
+  login: loginReducer,
+});

@@ -1,58 +1,58 @@
 import InputGroup from "../Containers/InputGroup";
 import { useFormik, Form, FormikProvider } from "formik";
 import Button from "react-bootstrap/Button";
-import { validationSchema } from "./validation";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { WithApiService } from "../Hoc/With-api-service";
-import jwt from "jsonwebtoken";
-// Import actions
-import { loginUserAction } from "../../Actions/loginUserUactions/loginUserAction";
+import { validationSchema } from "./validation";
 
-import { useDispatch } from "react-redux";
 
-const LoginPage = (props) => {
-  const { ApiService } = props;
+const Registration =()=>{
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const onSubmit = ()=> {
+    console.log(values)
+}
 
-  const onSubmit = async () => {
-    ApiService.loginUser(values).then((response) => { 
-      const { data } = response;
-      localStorage.setItem("token", data);
-      if (data.message) {
-        console.log(data.message);
-        setFieldError("Email", data.message);
-        setFieldError("Password", data.message);
-      } else {
-        dispatch(loginUserAction(jwt.decode(data, { complete: true }).payload));
-        navigate("/adminPanel");
-      }
-    });
-  };
-
-  const initialValues = {
+ const initialValues = {
+    Name:"",
+    Surname:"",
     Email: "",
     Password: "",
   };
 
-  const formik = useFormik({
+const formik = useFormik({
     validationSchema,
     initialValues,
     onSubmit,
   });
+  
+     const { touched, errors, values, handleChange, handleSubmit, setFieldError } = formik;
+ 
 
-  const { touched, errors, values, handleChange, handleSubmit, setFieldError } =
-    formik;
-
-  return (
-    <div className="container">
-      <h1>Login</h1>
+    return(
+        <>
+        <div className="container">
+      <h1>Реєстрація</h1>
       <div className="row">
         <div className="col-4"></div>
         <FormikProvider value={formik}>
           <Form onSubmit={handleSubmit} className="col-4">
+              <InputGroup
+              field="Name"
+              label="Name"
+              type="text"
+              touched={touched.Name}
+              error={errors.Name}
+              value={values.Name}
+              onChange={handleChange}
+            />
+            <InputGroup
+              field="Surname"
+              label="Surname"
+              type="text"
+              touched={touched.Surname}
+              error={errors.Surname}
+              value={values.Surname}
+              onChange={handleChange}
+            />
             <InputGroup
               field="Email"
               label="Email"
@@ -84,7 +84,11 @@ const LoginPage = (props) => {
         <div className="col-4"></div>
       </div>
     </div>
-  );
+
+        </>
+    );
+
 };
 
-export default WithApiService()(LoginPage);
+
+export default Registration;

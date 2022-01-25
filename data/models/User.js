@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const db = require("../config/database");
 
-const User  = db.define('Users', {
+const User = db.define('Users', {
     Name: {
         type: Sequelize.STRING,
         allowNull: true
@@ -21,8 +21,8 @@ const User  = db.define('Users', {
     },
     Role: {
         type: Sequelize.STRING,
-        allowNull: false,
-    }
+        allowNull: false
+    },
 })
 
 User.sync().then(() => console.log("Table user created..."))
