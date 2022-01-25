@@ -20,23 +20,27 @@ import PrimarySearchAppBar from "../../AppBar/AppBar";
 import jwt from "jsonwebtoken";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { loginUserByTokenAction } from "../../../Actions/loginUserUactions/loginUserAction";
 
 const drawerWidth = 240;
 
 function DashBoard(props) {
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-  if (localStorage.token) {
-    const userData = jwt.decode(localStorage.token, { complete: true }).payload;
-    dispatch(loginUserByTokenAction(userData));
-    navigate("/adminPanel");
-  }
-
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.token) {
+      const userData = jwt.decode(localStorage.token, {
+        complete: true,
+      }).payload;
+      dispatch(loginUserByTokenAction(userData));
+      navigate("/adminPanel");
+    }
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

@@ -27,7 +27,14 @@ const ProfilePage = () => {
               Edit Profile
             </Link>
           </div>
-
+          <div className="text-center">
+            <Link
+              class="btn btn-secondary"
+              to="/adminPanel/profile/changePassword"
+            >
+              ChangePassword
+            </Link>
+          </div>
         </div>
       </div>
       <div className="col-4"></div>

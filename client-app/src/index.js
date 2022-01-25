@@ -13,7 +13,10 @@ import { store } from "./store";
 import LoginPage from "./Components/LoginPage/LoginPage";
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
+
+import ChangePassword from "./Components/Profile/changePassword/index.js";
 import Admin from "./Components/Admin/index";
+
 import ProfilePage from "./Components/Profile/ProfilePage";
 
 // Hoc ApiService
@@ -24,9 +27,6 @@ import UserList from "./Components/UserList/Userlist";
 const apiService = new ApiService();
 
 const App = () => {
-  
-  
-
   return (
     <Provider store={store}>
       <ApiStoreServiceProvider value={apiService}>
@@ -42,6 +42,10 @@ const App = () => {
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/profile" element={<ProfilePage />} />
+              <Route
+                path="/adminPanel/profile/changePassword"
+                element={<ChangePassword />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>

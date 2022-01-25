@@ -5,7 +5,7 @@ export const loginUserAction = (user) => {
   };
 };
 
-export const loginUserByTokenAction = (user) => {
+ export const loginUserByTokenAction = (user) => {
   return {
     type: "LOGIN_USER_BY_TOKEN",
     payload: user,
