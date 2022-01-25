@@ -19,10 +19,15 @@ import Registration from './Components/Registration/Registration'
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
+<<<<<<< HEAD
 import Admin from "./Components/Admin/index"
 import EditProfile from "./Components/EditProfile/EditProfile";
 import ChangePassword from "./Components/Profile/changePassword/index.js"
+=======
+>>>>>>> DEV
 
+import ChangePassword from "./Components/Profile/changePassword/index.js";
+import Admin from "./Components/Admin/index";
 
 import ProfilePage from "./Components/Profile/ProfilePage";
 

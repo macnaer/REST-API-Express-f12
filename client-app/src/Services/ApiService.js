@@ -40,6 +40,7 @@ export default class ApiService {
       });
     return data;
   }
+
   async updatePassword(password) {
     const data = await User.updatePassword(password);
   }

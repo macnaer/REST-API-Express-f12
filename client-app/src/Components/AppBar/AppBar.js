@@ -18,6 +18,10 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 
 // Import Link
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { logoutUserAction } from "../../Actions/loginUserUactions/loginUserAction";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,6 +73,15 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logoutUserHandler = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutUserAction());
+    navigate("/");
+  };
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -108,7 +121,7 @@ export default function PrimarySearchAppBar() {
           Profile
         </Link>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>log out</MenuItem>
+      <MenuItem onClick={logoutUserHandler}>log out</MenuItem>
     </Menu>
   );
 
@@ -159,7 +172,6 @@ export default function PrimarySearchAppBar() {
         >
           <AccountCircle />
         </IconButton>
-        {/* <p>Profile</p> */}
         <Link to="/adminPanel/profile">Profile</Link>
       </MenuItem>
     </Menu>
