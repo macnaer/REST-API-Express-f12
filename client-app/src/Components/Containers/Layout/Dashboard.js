@@ -1,33 +1,46 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import PropTypes from "prop-types";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MailIcon from "@mui/icons-material/Mail";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
 import { WithApiService } from "../../Hoc/With-api-service";
+import PrimarySearchAppBar from "../../AppBar/AppBar";
 
-import {  Outlet, useNavigate } from "react-router-dom";
-
-import PrimarySearchAppBar from '../../AppBar/AppBar'
+import jwt from "jsonwebtoken";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loginUserByTokenAction } from "../../../Actions/loginUserUactions/loginUserAction";
 
 const drawerWidth = 240;
 
 function DashBoard(props) {
-
-
-  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.token) {
+      const userData = jwt.decode(localStorage.token, {
+        complete: true,
+      }).payload;
+      dispatch(loginUserByTokenAction(userData));
+      navigate("/adminPanel");
+    }
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -59,11 +72,11 @@ function DashBoard(props) {
         <ListItem
           button
           onClick={() => {
-            navigate("/adminpanel");
+            navigate("/");
           }}
         >
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary={"UserList"} />
+          <ListItemText primary={"Home"} />
         </ListItem>
       </List>
       <Divider />

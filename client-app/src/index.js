@@ -23,9 +23,9 @@ import LoginPage from "./Components/LoginPage/LoginPage";
 >>>>>>> 8622ad5f091fab0529aa60578d00043270384c64
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
 import Main from "./Components/Main/index";
-import ChangePassword from "./Components/Profile/changePassword/index.js"
-import Admin from "./Components/Admin/index";
 
+import ChangePassword from "./Components/Profile/changePassword/index.js";
+import Admin from "./Components/Admin/index";
 
 import ProfilePage from "./Components/Profile/ProfilePage";
 

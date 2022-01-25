@@ -18,16 +18,16 @@ const LoginPage = (props) => {
   const navigate = useNavigate();
 
   const onSubmit = async () => {
-    ApiService.loginUser(values).then((response) => {
+    ApiService.loginUser(values).then((response) => { 
       const { data } = response;
       localStorage.setItem("token", data);
       if (data.message) {
+        console.log(data.message);
         setFieldError("Email", data.message);
         setFieldError("Password", data.message);
       } else {
         dispatch(loginUserAction(jwt.decode(data, { complete: true }).payload));
         navigate("/adminPanel");
-
       }
     });
   };
