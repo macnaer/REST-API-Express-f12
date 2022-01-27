@@ -2,7 +2,6 @@ import React from "react";
 import InputGroup from "../Containers/InputGroup";
 import { useFormik, Form, FormikProvider } from "formik";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import { validationSchema } from "./validation";
 
 //select
@@ -13,10 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { versionsByValue } from "tedious/lib/tds-versions";
 
-import ApiService from "../../Services/ApiService";
-import { SliderValueLabelUnstyled } from "@mui/material";
 
 import { WithApiService } from "../Hoc/With-api-service";
 
