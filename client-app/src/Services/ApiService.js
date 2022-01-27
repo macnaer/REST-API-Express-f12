@@ -15,7 +15,8 @@ const requests = {
 const User = {
   getAllUsers: () => requests.get("/users/"),
   loginUser: (test) => requests.post("/users/login", test),
-  createUser: (user) => requests.post(`/users/create-user`, user)
+  createUser: (user) => requests.post(`/users/create-user`, user),
+  updatePassword: (data) => requests.put("/users/updatePassword", data),
 };
 
 export default class ApiService {
@@ -52,5 +53,9 @@ export default class ApiService {
         return error.response;
       });
     return data;
+  }
+
+  async updatePassword(password) {
+    const data = await User.updatePassword(password);
   }
 }

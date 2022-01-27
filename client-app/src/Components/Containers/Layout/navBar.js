@@ -1,9 +1,24 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { logoutUserAction } from "../../../Actions/loginUserUactions/loginUserAction";
 
 const Header = () => {
+  const { isAuth } = useSelector((store) => store.login);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-	return (
+  const logoutUserHandler = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutUserAction());
+    navigate("/");
+  };
+
+  return (
     <>
       <div className="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,9 +47,20 @@ const Header = () => {
               </ul>
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    Вхід
-                  </Link>
+                  {isAuth && (
+                    <button
+                      onClick={logoutUserHandler}
+                      type="button"
+                      class="btn btn-secondary"
+                    >
+                      Вихід
+                    </button>
+                  )}
+                  {!isAuth && (
+                    <Link className="nav-link" to="/login">
+                      Вхід
+                    </Link>
+                  )}
                 </li>
               </ul>
             </div>
