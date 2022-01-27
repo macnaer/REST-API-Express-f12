@@ -18,6 +18,7 @@ import DashBoard from './Components/Containers/Layout/Dashboard';
 import Registration from './Components/Registration/Registration'
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
+import Registration from "./Components/Registration/Registration";
 import Main from "./Components/Main/index";
 import Admin from "./Components/Admin/index"
 import EditProfile from "./Components/EditProfile/EditProfile";
@@ -46,15 +47,16 @@ const App = () => {
             <Route path="/adminPanel" element={<Dashboard />}>
               <Route path="/adminPanel/admin" exact element={<Admin />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
+<<<<<<< HEAD
 
               <Route path="/adminPanel/editProfile" element={<EditProfile />} />
 
+=======
+              <Route path="/adminPanel/register" element={<Registration />} />
+>>>>>>> 29994396ae8308f11994293b065d5102b638006d
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/profile" element={<ProfilePage />} />
-              <Route
-                path="/adminPanel/profile/changePassword"
-                element={<ChangePassword />}
-              />
+              <Route path="/adminPanel/profile/changePassword" element={<ChangePassword />} />
             </Route>
           </Routes>
         </BrowserRouter>

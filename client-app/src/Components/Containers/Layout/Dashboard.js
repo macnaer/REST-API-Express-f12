@@ -17,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import { WithApiService } from "../../Hoc/With-api-service";
 import PrimarySearchAppBar from "../../AppBar/AppBar";
 
+
+
 import jwt from "jsonwebtoken";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -72,11 +74,11 @@ function DashBoard(props) {
         <ListItem
           button
           onClick={() => {
-            navigate("/");
+            navigate("/adminpanel/register");
           }}
         >
           <ListItemIcon></ListItemIcon>
-          <ListItemText primary={"Home"} />
+          <ListItemText primary={"Create User"} />
         </ListItem>
       </List>
       <Divider />
