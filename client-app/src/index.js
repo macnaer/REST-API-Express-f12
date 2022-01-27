@@ -12,6 +12,7 @@ import { store } from "./store";
 // Componnents
 import LoginPage from "./Components/LoginPage/LoginPage";
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
+import Registration from "./Components/Registration/Registration";
 import Main from "./Components/Main/index";
 
 import ChangePassword from "./Components/Profile/changePassword/index.js";
@@ -40,12 +41,10 @@ const App = () => {
             <Route path="/adminPanel" element={<Dashboard />}>
               <Route path="/adminPanel/admin" exact element={<Admin />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
+              <Route path="/adminPanel/register" element={<Registration />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/profile" element={<ProfilePage />} />
-              <Route
-                path="/adminPanel/profile/changePassword"
-                element={<ChangePassword />}
-              />
+              <Route path="/adminPanel/profile/changePassword" element={<ChangePassword />} />
             </Route>
           </Routes>
         </BrowserRouter>
