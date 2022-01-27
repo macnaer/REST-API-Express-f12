@@ -60,13 +60,14 @@ const Registration = (props) => {
     console.log(user)
 
     ApiService.register(user).then(res => {
-      console.log('respons', res)
+      // console.log('respons', res)
       const { data, status } = res
       if (status != undefined && status === 400) {
         console.log(data);
       }
       else {
         console.log("Profile successfully created")
+        console.log(data);
       }
     })
   }
@@ -148,8 +149,6 @@ const Registration = (props) => {
                     value={values.Role}
                     name="Role"
                     label="Roles"
-                    touched={touched.Role}
-                    error={errors.Role}
                     onChange={handleChange}
                     fullWidth
                   >
