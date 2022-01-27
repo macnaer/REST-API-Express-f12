@@ -18,6 +18,7 @@ const User = {
   loginUser: (test) => requests.post("/users/login", test),
   createUser: (user) => requests.post(`/users/create-user`, user),
   updatePassword: (data) => requests.put("/users/updatePassword", data),
+  updateUser: (data) => requests.put("/users/", data),
 };
 
 export default class ApiService {
@@ -68,5 +69,9 @@ export default class ApiService {
 
   async updatePassword(password) {
     const data = await User.updatePassword(password);
+  }
+
+  async updateUser(userData) {
+    const data = await User.updateUser(userData);
   }
 }
