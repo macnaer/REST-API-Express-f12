@@ -34,8 +34,6 @@ const Registration = (props) => {
   const { ApiService } = props;
 
 
-
-
   const initialValues = {
     Name: "",
     Surname: "",

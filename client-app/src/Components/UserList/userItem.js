@@ -1,6 +1,29 @@
 
+import { WithApiService } from "../Hoc/With-api-service";
+import { useDispatch } from "react-redux";
+import { UserDel } from "../../Actions/DashBoardActions/DashBoardActions";
 
-const UserItem = ({userItem: { id, Name, Surname, Email, Role }} ) => {
+
+const UserItem = (props) => {
+  const { ApiService, userItem: { id, Name, Surname, Email, Role } } = props;
+  const dispatch = useDispatch();
+  // const deleteUser = (id) => {
+  //   ApiService.deleteUser(id).then(res => {
+  //     // console.log('respons', res)
+  //     const { data, status } = res
+  //     if (status != undefined && status === 400) {
+  //       console.log(data);
+  //     }
+  //     else {
+  //       console.log(data);
+  //     }
+  //   })
+  // }
+
+
+
+
+
   return (
     <>
       <tr>
@@ -16,7 +39,11 @@ const UserItem = ({userItem: { id, Name, Surname, Email, Role }} ) => {
           <button type="button" class="btn btn-warning m-2">
             Edit
           </button>
-          <button type="button" class="btn btn-danger m-2">
+          <button onClick={() => {
+            ApiService.deleteUser(id);
+            dispatch(UserDel(id))
+
+          }} type="button" class="btn btn-danger m-2">
             Delete
           </button>
         </td>
@@ -25,4 +52,4 @@ const UserItem = ({userItem: { id, Name, Surname, Email, Role }} ) => {
   );
 };
 
-export default UserItem;
+export default WithApiService()(UserItem);
