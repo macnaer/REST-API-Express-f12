@@ -24,14 +24,14 @@ export default class ApiService {
 
   async deleteUser(id) {
     const data = await User.deleteUser(id)
-    //   .then((responce) => {
-    //     return {
-    //       data: responce
-    //     }
-    //   }).catch(error => {
-    //     return error.response;
-    //   })
-    // return data;
+      .then((responce) => {
+        return {
+          data: responce
+        }
+      }).catch(error => {
+        return error.response;
+      })
+    return data;
   }
 
   async register(user) {
