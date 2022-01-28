@@ -54,13 +54,11 @@ const UserItem = (props) => {
         </DialogTitle>
 
         <DialogActions>
-
           <Button
             onClick={() => {
               setOpen(false);
             }}>ні
           </Button>
-
           <Button
             onClick={() => {
               ApiService.deleteUser(id);
@@ -68,7 +66,6 @@ const UserItem = (props) => {
             }} autoFocus>
             так видалити
           </Button>
-
         </DialogActions>
       </Dialog>
     </>
