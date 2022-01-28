@@ -17,9 +17,22 @@ const User = {
   loginUser: (test) => requests.post("/users/login", test),
   createUser: (user) => requests.post(`/users/create-user`, user),
   updatePassword: (data) => requests.put("/users/updatePassword", data),
+  deleteUser: (id) => requests.del(`/users/${id}`)
 };
 
 export default class ApiService {
+
+  async deleteUser(id) {
+    const data = await User.deleteUser(id)
+      .then((responce) => {
+        return {
+          data: responce
+        }
+      }).catch(error => {
+        return error.response;
+      })
+    return data;
+  }
 
   async register(user) {
     const data = await User.createUser(user)
