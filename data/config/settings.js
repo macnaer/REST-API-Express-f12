@@ -5,7 +5,7 @@ module.exports = Config = {
   DATABASE_NAME: 'Node_f12',
   DATABASE_USER: "test",
   // DATABASE_USER: "sa",
-  DATABASE_PASS: "1",
+  DATABASE_PASS: "Qwerty-1",
   // DATABASE_PASS: "RpYP>$K((2Y$:_6K",
   DATABASE_PORT: 1433,
   DATABASE_DIALECT: "mssql"
