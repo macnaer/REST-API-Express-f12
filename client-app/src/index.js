@@ -29,7 +29,7 @@ import ApiService from "./Services/ApiService";
 import { ApiStoreServiceProvider } from "./Components/Api-service-context/Api-service-context";
 import Dashboard from "./Components/Containers/Layout/Dashboard";
 import UserList from "./Components/UserList/Userlist";
-
+import EditUser from "./Components/UserEdit/EditUser"
 import UserInfo from "./Components/UserInfo/index"
 
 
@@ -52,6 +52,7 @@ const App = () => {
               <Route path="/adminPanel/admin" exact element={<Admin />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/editProfile" element={<EditProfile />} />
+              <Route path="/adminPanel/editUser/:id" element={<EditUser />} />
               <Route path="/adminPanel/register" element={<Registration />} />
               <Route path="/adminPanel/userInfo/:id" element={<UserInfo />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
@@ -64,13 +65,13 @@ const App = () => {
           </Routes>
         </BrowserRouter>
         <Router>
-          <Routes>  
-            <Route path="/admin/dashboard" exact element={<DashBoard />}  />
-            <Route path="/" exact element={<DashBoard />}  />
+          <Routes>
+            <Route path="/admin/dashboard" exact element={<DashBoard />} />
+            <Route path="/" exact element={<DashBoard />} />
             <Route path="/register" element={<Registration />} />
-            <Route path="/login"  element={<LoginPage />} />
-          </Routes>    
-      </Router>
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </Router>
       </ApiStoreServiceProvider>
     </Provider>
   );
