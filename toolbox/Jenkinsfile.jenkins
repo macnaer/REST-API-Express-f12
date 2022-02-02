@@ -48,7 +48,7 @@ pipeline  {
                 echo 'Creating docker image ...'
                 dir('.'){
                     sh '''
-                    docker build -t robertbarbara/admin_panel .
+                    docker build -t diogensynonsy/admin_panel .
                     '''
                 }
             }
@@ -67,7 +67,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push robertbarbara/admin_panel
+                docker push diogensynonsy/admin_panel
                 '''
             }
         } 
@@ -76,7 +76,7 @@ pipeline  {
             steps {
                 echo " ============== running container =================="
                 sh '''
-                docker run -d --restart=always --name appserver -p 80:3000 robertbarbara/admin_panel
+                docker run -d --restart=always --name appserver -p 80:3000 diogensynonsy/admin_panel
                 '''
             }
         }   
