@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "./navBar";
 
+
 const DefaultLayout = () => {
   return (
     <>
