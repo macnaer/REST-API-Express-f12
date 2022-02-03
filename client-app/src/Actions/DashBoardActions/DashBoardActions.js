@@ -4,4 +4,9 @@ export const LoadUsers = (users) => {
     payload: users,
   };
 };
-
+export const UserDel = (id) => {
+  return {
+    type: "USERS_DEL",
+    payload: id,
+  };
+};

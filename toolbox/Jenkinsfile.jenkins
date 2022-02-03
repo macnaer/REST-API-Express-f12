@@ -1,0 +1,84 @@
+#!groovy
+//  groovy Jenkinsfile
+properties([disableConcurrentBuilds()])
+
+pipeline  {
+    
+    agent { 
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        
+        stage("Stopping containers") {
+            steps {
+                echo 'Stopping docker containers ...'
+                dir('.'){
+                    sh '''
+                    docker stop $(docker ps -a -q)
+                   '''
+                }
+            }
+        }
+        stage("Removing containers") {
+            steps {
+                echo 'Removing docker containers ...'
+                dir('.'){
+                    sh '''
+                    docker rm -f $(docker ps -a -q)
+                   '''
+                }
+            }
+        }
+        stage("Removing images") {
+            steps {
+                echo 'Removing docker images ...'
+                dir('.'){
+                    sh '''
+                    docker rmi -f $(docker images -aq)
+                   '''
+                }
+            }
+        }
+        stage("Creating images") {
+            steps {
+                echo 'Creating docker image ...'
+                dir('.'){
+                    sh '''
+                    docker build -t diogensynonsy/admin_panel .
+                    '''
+                }
+            }
+        }
+        stage("docker login") {
+            steps {
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'DockerHub-Credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh '''
+                    docker login -u $USERNAME -p $PASSWORD
+                    '''
+                }
+            }
+        }
+        stage("docker push") {
+            steps {
+                echo " ============== pushing image =================="
+                sh '''
+                docker push diogensynonsy/admin_panel
+                '''
+            }
+        } 
+
+        stage("docker run") {
+            steps {
+                echo " ============== running container =================="
+                sh '''
+                docker run -d --restart=always --name appserver -p 80:3000 diogensynonsy/admin_panel
+                '''
+            }
+        }   
+    }        
+}
