@@ -1,6 +1,6 @@
 const initialSate = {
   isAuth: false,
-  userProdileInfo: null,
+  userProfileInfo: { Role: '' }
 };
 
 const loginReducer = (state = initialSate, action) => {
@@ -9,21 +9,21 @@ const loginReducer = (state = initialSate, action) => {
       return {
         ...state,
         isAuth: true,
-        userProdileInfo: action.payload,
+        userProfileInfo: action.payload,
       };
 
     case "LOGIN_USER_BY_TOKEN":
       return {
         ...state,
         isAuth: true,
-        userProdileInfo: action.payload,
+        userProfileInfo: action.payload,
       };
 
     case "LOGOUT_USER":
       return {
         ...state,
         isAuth: false,
-        userProdileInfo: null,
+        userProfileInfo: initialSate.userProfileInfo
       };
 
     default:

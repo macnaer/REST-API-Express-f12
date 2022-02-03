@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 
 import { WithApiService } from "../../Hoc/With-api-service";
 import PrimarySearchAppBar from "../../AppBar/AppBar";
-
+import { useSelector } from "react-redux";
 
 
 import jwt from "jsonwebtoken";
@@ -30,7 +30,7 @@ const drawerWidth = 240;
 function DashBoard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const { userProfileInfo } = useSelector(store => store.login)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -43,6 +43,7 @@ function DashBoard(props) {
       navigate("/adminPanel");
     }
   }, []);
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -71,6 +72,7 @@ function DashBoard(props) {
           <ListItemIcon></ListItemIcon>
           <ListItemText primary={"UserList"} />
         </ListItem>
+
         <ListItem
           button
           onClick={() => {
@@ -80,6 +82,19 @@ function DashBoard(props) {
           <ListItemIcon></ListItemIcon>
           <ListItemText primary={"Create User"} />
         </ListItem>
+
+        {
+          userProfileInfo.Role === 'admin' &&
+          <ListItem
+            button
+            onClick={() => {
+              navigate("/adminpanel/Role");
+            }}
+          >
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary={"Role"} />
+          </ListItem>
+        }
       </List>
       <Divider />
     </div>
