@@ -3,9 +3,9 @@ import { ApiStoreServiceConsumer } from "../Api-service-context/Api-service-cont
 
 const WithApiService = () => (Wrapped) => {
     return (props) => {
-        return(
+        return (
             <ApiStoreServiceConsumer>
-                { 
+                {
                     (ApiService) => {
                         return <Wrapped {...props} ApiService={ApiService} />
                     }

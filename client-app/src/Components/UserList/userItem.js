@@ -1,8 +1,33 @@
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { WithApiService } from "../Hoc/With-api-service";
+import { useDispatch } from "react-redux";
+import { UserDel } from "../../Actions/DashBoardActions/DashBoardActions";
 
+//dial
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useNavigate } from "react-router-dom";
 
-const UserItem = ({userItem: { id, Name, Surname, Email, Role }} ) => {
+const UserItem = (props) => {
+  const {
+    ApiService,
+    userItem: { id, Name, Surname, Email, Role },
+  } = props;
+  const dispatch = useDispatch();
+
+  //dial
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleCloseNo = () => {
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
+
   return (
     <>
       <tr>
@@ -26,13 +51,46 @@ const UserItem = ({userItem: { id, Name, Surname, Email, Role }} ) => {
           >
             Edit
           </button>
-          <button type="button" className="btn btn-danger m-2">
+          <button
+            onClick={handleClickOpen}
+            type="button"
+            class="btn btn-danger m-2"
+          >
             Delete
           </button>
         </td>
       </tr>
+
+      <Dialog
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {`Ви дійсно хочете видалити користувача ${Name} ${Surname}?`}
+        </DialogTitle>
+
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            ні
+          </Button>
+          <Button
+            onClick={() => {
+              ApiService.deleteUser(id);
+              dispatch(UserDel(id));
+            }}
+            autoFocus
+          >
+            так видалити
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
-export default UserItem;
+export default WithApiService()(UserItem);
