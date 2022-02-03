@@ -16,7 +16,6 @@ const UserList = (props) => {
     });
   }, [ApiService, dispatch]);
 
-
   return (
     <>
       <h2>UserList</h2>
