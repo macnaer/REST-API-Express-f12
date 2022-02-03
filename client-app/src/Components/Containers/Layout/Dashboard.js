@@ -71,6 +71,7 @@ function DashBoard(props) {
           <ListItemIcon></ListItemIcon>
           <ListItemText primary={"UserList"} />
         </ListItem>
+
         <ListItem
           button
           onClick={() => {
@@ -79,6 +80,16 @@ function DashBoard(props) {
         >
           <ListItemIcon></ListItemIcon>
           <ListItemText primary={"Create User"} />
+        </ListItem>
+
+        <ListItem
+          button
+          onClick={() => {
+            navigate("/adminpanel/Role");
+          }}
+        >
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary={"Role"} />
         </ListItem>
       </List>
       <Divider />

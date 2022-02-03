@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Routes } from "react-router";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
@@ -24,6 +24,7 @@ import Admin from "./Components/Admin/index"
 import EditProfile from "./Components/EditProfile/EditProfile";
 import ChangePassword from "./Components/Profile/changePassword/index.js"
 import ProfilePage from "./Components/Profile/ProfilePage";
+import Role from "./Components/Role/Role";
 
 // Hoc ApiService
 import ApiService from "./Services/ApiService";
@@ -58,6 +59,7 @@ const App = () => {
               <Route path="/adminPanel/userInfo/:id" element={<UserInfo />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/profile" element={<ProfilePage />} />
+              <Route path="/adminPanel/Role" element={<Role />} />
               <Route
                 path="/adminPanel/profile/changePassword"
                 element={<ChangePassword />}
