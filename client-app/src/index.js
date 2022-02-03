@@ -15,7 +15,6 @@ import { store } from "./store";
 
 // Componnents
 import DashBoard from './Components/Containers/Layout/Dashboard';
-// import DashBoard from './Components/Dashboard/Dashboard';
 import Registration from './Components/Registration/Registration'
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
@@ -33,11 +32,16 @@ import Dashboard from "./Components/Containers/Layout/Dashboard";
 import UserList from "./Components/UserList/Userlist";
 import EditUser from "./Components/UserEdit/EditUser"
 import UserInfo from "./Components/UserInfo/index"
-
-
-// import EditProfile from "./Components/EditProfile/EditProfile";
+import { loginUserByTokenAction } from "./Actions/loginUserUactions/loginUserAction";
+import jwt from "jsonwebtoken";
 
 const apiService = new ApiService();
+const token = localStorage.token;
+
+if (token) {
+  const userData = jwt.decode(token, { json: true })
+  store.dispatch(loginUserByTokenAction(userData));
+}
 
 const App = () => {
   return (
