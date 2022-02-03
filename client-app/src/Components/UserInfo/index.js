@@ -29,7 +29,7 @@ const UserInfo = (props) => {
 
 export default WithApiService()(UserInfo);
 
- export const getUserId = (data) => {
+export const getUserId = (data) => {
    return {
      type: "GET_USER_INFO",
      payload: {...data},

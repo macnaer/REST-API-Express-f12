@@ -44,7 +44,11 @@ const UserItem = (props) => {
           >
             Info
           </button>
-          <button type="button" className="btn btn-warning m-2">
+          <button
+            type="button"
+            className="btn btn-warning m-2"
+            onClick={() => navigate(`/adminPanel/editUser/${id}`)}
+          >
             Edit
           </button>
           <button
