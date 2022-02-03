@@ -18,9 +18,24 @@ const User = {
   loginUser: (test) => requests.post("/users/login", test),
   createUser: (user) => requests.post(`/users/create-user`, user),
   updatePassword: (data) => requests.put("/users/updatePassword", data),
+  updateUserInfo: (data) => requests.put("/users/", data),
+  deleteUser: (id) => requests.del(`/users/${id}`)
 };
 
 export default class ApiService {
+
+  async deleteUser(id) {
+    const data = await User.deleteUser(id)
+      .then((responce) => {
+        return {
+          data: responce
+        }
+      }).catch(error => {
+        return error.response;
+      })
+    return data;
+  }
+
   async register(user) {
     const data = await User.createUser(user)
       .then((responce) => {
@@ -68,5 +83,11 @@ export default class ApiService {
 
   async updatePassword(password) {
     const data = await User.updatePassword(password);
+  }
+  async updateUserInfo(dataUser) {
+    const data = await User.updateUserInfo(dataUser);
+  }
+  async updateUser(userData) {
+    const data = await User.updateUser(userData);
   }
 }
