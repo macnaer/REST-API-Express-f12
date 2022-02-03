@@ -30,7 +30,12 @@ import ApiService from "./Services/ApiService";
 import { ApiStoreServiceProvider } from "./Components/Api-service-context/Api-service-context";
 import Dashboard from "./Components/Containers/Layout/Dashboard";
 import UserList from "./Components/UserList/Userlist";
+
+import UserInfo from "./Components/UserInfo/index"
+
+
 // import EditProfile from "./Components/EditProfile/EditProfile";
+
 const apiService = new ApiService();
 
 const App = () => {
@@ -49,9 +54,13 @@ const App = () => {
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/editProfile" element={<EditProfile />} />
               <Route path="/adminPanel/register" element={<Registration />} />
+              <Route path="/adminPanel/userInfo/:id" element={<UserInfo />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/profile" element={<ProfilePage />} />
-              <Route path="/adminPanel/profile/changePassword" element={<ChangePassword />} />
+              <Route
+                path="/adminPanel/profile/changePassword"
+                element={<ChangePassword />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
