@@ -9,12 +9,13 @@ const UserList = (props) => {
   const { ApiService } = props;
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      ApiService.getAllUsers().then((response) => {
-        const { data } = response;
-        dispatch(LoadUsers(data));
-      });
-    }, [ApiService, dispatch]);
+  useEffect(() => {
+    ApiService.getAllUsers().then((response) => {
+      const { data } = response;
+      dispatch(LoadUsers(data));
+    });
+  }, [ApiService, dispatch]);
+
 
   return (
     <>
@@ -31,7 +32,7 @@ const UserList = (props) => {
           </tr>
         </thead>
         <tbody d-flex align-items-center>
-          {UsersList.map((el, idx) => <UserItem key={idx} userItem={el}/> )}
+          {UsersList.map((el, idx) => <UserItem key={idx} userItem={el} />)}
         </tbody>
       </table>
     </>
