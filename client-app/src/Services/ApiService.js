@@ -14,9 +14,11 @@ const requests = {
 
 const User = {
   getAllUsers: () => requests.get("/users/"),
+  getUserById: (id) => requests.get(`/users/${id}`),
   loginUser: (test) => requests.post("/users/login", test),
   createUser: (user) => requests.post(`/users/create-user`, user),
   updatePassword: (data) => requests.put("/users/updatePassword", data),
+  updateUserInfo: (data) => requests.put("/users/", data),
   deleteUser: (id) => requests.del(`/users/${id}`)
 };
 
@@ -38,16 +40,27 @@ export default class ApiService {
     const data = await User.createUser(user)
       .then((responce) => {
         return {
-          data: responce
-        }
-      }).catch(error => {
-        return error.response;
+          data: responce,
+        };
       })
+      .catch((error) => {
+        return error.response;
+      });
     return data;
   }
 
   async getAllUsers() {
     const data = await User.getAllUsers()
+      .then((response) => {
+        return { data: response };
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return data;
+  }
+  async getUserById(id) {
+    const data = await User.getUserById(id)
       .then((response) => {
         return { data: response };
       })
@@ -70,5 +83,11 @@ export default class ApiService {
 
   async updatePassword(password) {
     const data = await User.updatePassword(password);
+  }
+  async updateUserInfo(dataUser) {
+    const data = await User.updateUserInfo(dataUser);
+  }
+  async updateUser(userData) {
+    const data = await User.updateUser(userData);
   }
 }

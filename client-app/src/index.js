@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Routes } from "react-router";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
@@ -15,7 +15,6 @@ import { store } from "./store";
 
 // Componnents
 import DashBoard from './Components/Containers/Layout/Dashboard';
-// import DashBoard from './Components/Dashboard/Dashboard';
 import Registration from './Components/Registration/Registration'
 import LoginPage from './Components/LoginPage/LoginPage';
 import DefaultLayout from "./Components/Containers/Layout/defaultLayout";
@@ -24,14 +23,25 @@ import Admin from "./Components/Admin/index"
 import EditProfile from "./Components/EditProfile/EditProfile";
 import ChangePassword from "./Components/Profile/changePassword/index.js"
 import ProfilePage from "./Components/Profile/ProfilePage";
+import Role from "./Components/Role/Role";
 
 // Hoc ApiService
 import ApiService from "./Services/ApiService";
 import { ApiStoreServiceProvider } from "./Components/Api-service-context/Api-service-context";
 import Dashboard from "./Components/Containers/Layout/Dashboard";
 import UserList from "./Components/UserList/Userlist";
-// import EditProfile from "./Components/EditProfile/EditProfile";
+import EditUser from "./Components/UserEdit/EditUser"
+import UserInfo from "./Components/UserInfo/index"
+import { loginUserByTokenAction } from "./Actions/loginUserUactions/loginUserAction";
+import jwt from "jsonwebtoken";
+
 const apiService = new ApiService();
+const token = localStorage.token;
+
+if (token) {
+  const userData = jwt.decode(token, { json: true })
+  store.dispatch(loginUserByTokenAction(userData));
+}
 
 const App = () => {
   return (
@@ -48,21 +58,27 @@ const App = () => {
               <Route path="/adminPanel/admin" exact element={<Admin />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/editProfile" element={<EditProfile />} />
+              <Route path="/adminPanel/editUser/:id" element={<EditUser />} />
               <Route path="/adminPanel/register" element={<Registration />} />
+              <Route path="/adminPanel/userInfo/:id" element={<UserInfo />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/profile" element={<ProfilePage />} />
-              <Route path="/adminPanel/profile/changePassword" element={<ChangePassword />} />
+              <Route path="/adminPanel/Role" element={<Role />} />
+              <Route
+                path="/adminPanel/profile/changePassword"
+                element={<ChangePassword />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
         <Router>
-          <Routes>  
-            <Route path="/admin/dashboard" exact element={<DashBoard />}  />
-            <Route path="/" exact element={<DashBoard />}  />
+          <Routes>
+            <Route path="/admin/dashboard" exact element={<DashBoard />} />
+            <Route path="/" exact element={<DashBoard />} />
             <Route path="/register" element={<Registration />} />
-            <Route path="/login"  element={<LoginPage />} />
-          </Routes>    
-      </Router>
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </Router>
       </ApiStoreServiceProvider>
     </Provider>
   );

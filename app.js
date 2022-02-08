@@ -11,7 +11,6 @@ db.authenticate()
 .then(() => console.log("Database conected... "))
 .catch(err => console.log("Connection error => ", err));
 
-
 const PORT = 5000;
 const app = express();
 
@@ -24,7 +23,6 @@ app.use((req,res, next) => {
 });
 
 app.use("/api/users", RegistrationRouter);
-
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
