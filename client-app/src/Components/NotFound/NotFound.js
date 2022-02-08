@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const NotFound = () => (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <img alt='404 Not Found!' src='https://www.initcoms.com/wp-content/uploads/2020/07/404-error-not-found-1.png' />
