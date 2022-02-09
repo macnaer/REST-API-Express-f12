@@ -24,6 +24,7 @@ import EditProfile from "./Components/EditProfile/EditProfile";
 import ChangePassword from "./Components/Profile/changePassword/index.js"
 import ProfilePage from "./Components/Profile/ProfilePage";
 import Role from "./Components/Role/Role";
+import NotFound from "./Components/NotFound/NotFound";
 
 // Hoc ApiService
 import ApiService from "./Services/ApiService";
@@ -64,21 +65,26 @@ const App = () => {
               <Route path="/adminPanel/userInfo/:id" element={<UserInfo />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
               <Route path="/adminPanel/Role" element={<Role />} />
+              <Route path="/adminPanel/profile" element={<ProfilePage />} />
+              <Route path="/adminPanel/role" element={<Role />} />
               <Route
                 path="/adminPanel/changePassword"
                 element={<ChangePassword />}
               />
+              <Route path="/adminPanel/register" element={<Registration />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
+
           </Routes>
         </BrowserRouter>
         {/* <Router>
-        <Routes>
-          <Route path="/admin/dashboard" exact element={<DashBoard />} />
-          <Route path="/" exact element={<DashBoard />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </Router> */}
+          <Routes>
+            <Route path="/admin/dashboard" exact element={<DashBoard />} />
+            <Route path="/" exact element={<DashBoard />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </Router> */}
       </ApiStoreServiceProvider>
     </Provider>
   );
