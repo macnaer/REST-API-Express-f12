@@ -52,6 +52,7 @@ const App = () => {
             <Route path="/" element={<DefaultLayout />}>
               <Route path="/" exact element={<Main />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
 
             <Route path="/adminPanel" element={<Dashboard />}>
@@ -62,23 +63,22 @@ const App = () => {
               <Route path="/adminPanel/register" element={<Registration />} />
               <Route path="/adminPanel/userInfo/:id" element={<UserInfo />} />
               <Route path="/adminPanel/userList" element={<UserList />} />
-              <Route path="/adminPanel/profile" element={<ProfilePage />} />
               <Route path="/adminPanel/Role" element={<Role />} />
               <Route
-                path="/adminPanel/profile/changePassword"
+                path="/adminPanel/changePassword"
                 element={<ChangePassword />}
               />
             </Route>
           </Routes>
         </BrowserRouter>
-        <Router>
-          <Routes>
-            <Route path="/admin/dashboard" exact element={<DashBoard />} />
-            <Route path="/" exact element={<DashBoard />} />
-            <Route path="/register" element={<Registration />} />
-            <Route path="/login" element={<LoginPage />} />
-          </Routes>
-        </Router>
+        {/* <Router>
+        <Routes>
+          <Route path="/admin/dashboard" exact element={<DashBoard />} />
+          <Route path="/" exact element={<DashBoard />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </Router> */}
       </ApiStoreServiceProvider>
     </Provider>
   );

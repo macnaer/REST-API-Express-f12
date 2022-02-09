@@ -117,7 +117,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link className="text-decoration-none" to="/adminPanel/profile">
+        <Link className="text-decoration-none" to="/profile">
           Profile
         </Link>
       </MenuItem>

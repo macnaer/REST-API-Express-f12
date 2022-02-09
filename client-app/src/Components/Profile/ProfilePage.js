@@ -7,14 +7,14 @@ import { getUserId } from "../UserInfo";
 
 const ProfilePage = (props) => {
   const { ApiService } = props;
-  const { userProdileInfo } = useSelector((store) => store.login);
+  const { userProfileInfo } = useSelector((store) => store.login);
   const { user } = useSelector((store) => store.infoUser);
   const [showSpiner, setShowSpiner] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setShowSpiner(true);
-    ApiService.getUserById(userProdileInfo.id).then((response) => {
+    ApiService.getUserById(userProfileInfo.id).then((response) => {
       const { data } = response;
       dispatch(getUserId({ ...data }));
       setShowSpiner(false);
