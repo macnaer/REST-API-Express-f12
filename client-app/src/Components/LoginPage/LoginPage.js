@@ -3,33 +3,35 @@ import { useFormik, Form, FormikProvider } from "formik";
 import Button from "react-bootstrap/Button";
 import { validationSchema } from "./validation";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { WithApiService } from "../Hoc/With-api-service";
 import jwt from "jsonwebtoken";
+import Spiner from "../Spiner/Spiner";
 // Import actions
-import { loginUserAction } from "./actionLogin";
-
-import { useSelector, useDispatch } from "react-redux";
-
+import { loginUserAction } from "../../Actions/loginUserUactions/loginUserAction";
+import { useDispatch } from "react-redux";
 
 const LoginPage = (props) => {
-
-
   const { ApiService } = props;
+  const [showLoader, setShowLoader] = useState(false);
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const onSubmit = async () => {
-    ApiService.loginUser(values).then((response) => {
+    setShowLoader(true);
+    await ApiService.loginUser(values).then((response) => {
       const { data } = response;
-      console.log(jwt.decode(data, { json: true }));
+      localStorage.setItem("token", data);
       if (data.message) {
+        console.log(data.message);
         setFieldError("Email", data.message);
         setFieldError("Password", data.message);
+        setShowLoader(false);
       } else {
-        dispatch(loginUserAction());
+        dispatch(loginUserAction(jwt.decode(data, { complete: true }).payload));
+        setShowLoader(false);
         navigate("/adminPanel");
       }
     });
@@ -39,6 +41,7 @@ const LoginPage = (props) => {
     Email: "",
     Password: "",
   };
+
   const formik = useFormik({
     validationSchema,
     initialValues,
@@ -50,6 +53,7 @@ const LoginPage = (props) => {
 
   return (
     <div className="container">
+      {showLoader && <Spiner />}
       <h1>Login</h1>
       <div className="row">
         <div className="col-4"></div>
