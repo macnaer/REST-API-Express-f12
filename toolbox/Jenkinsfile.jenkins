@@ -18,7 +18,7 @@ pipeline  {
                 echo 'Stopping docker containers ...'
                 dir('.'){
                     sh '''
-                    docker stop $(docker ps -a -q)
+                    docker stop $(docker ps -a -q) 2> /dev/null
                    '''
                 }
             }
@@ -28,7 +28,7 @@ pipeline  {
                 echo 'Removing docker containers ...'
                 dir('.'){
                     sh '''
-                    docker rm -f $(docker ps -a -q)
+                    docker rm -f $(docker ps -a -q) 2> /dev/null
                    '''
                 }
             }
@@ -38,8 +38,8 @@ pipeline  {
                 echo 'Removing docker images ...'
                 dir('.'){
                     sh '''
-                    docker rmi -f $(docker images -aq)
-                   '''
+                    docker rmi -f $(docker images -aq) 2> /dev/null
+                   ''' 
                 }
             }
         }
@@ -48,7 +48,7 @@ pipeline  {
                 echo 'Creating docker image ...'
                 dir('.'){
                     sh '''
-                    docker build -t robertbarbara/admin_panel .
+                    docker build -t macnaer/admin_panel .
                     '''
                 }
             }
@@ -67,7 +67,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push robertbarbara/admin_panel
+                docker push macnaer/admin_panel
                 '''
             }
         } 
@@ -76,7 +76,7 @@ pipeline  {
             steps {
                 echo " ============== running container =================="
                 sh '''
-                docker run -d --restart=always --name appserver -p 80:3000 robertbarbara/admin_panel
+                docker run -d --restart=always --name appserver -p 80:3000 macnaer/admin_panel
                 '''
             }
         }   
