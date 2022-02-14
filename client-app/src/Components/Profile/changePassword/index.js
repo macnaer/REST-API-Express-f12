@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 const ChangePassword = (props) => {
   const { ApiService } = props;
-  const { userProdileInfo:{id} } = useSelector((store) => store.login);
+  const { userProfileInfo:{id} } = useSelector((store) => store.login);
   const navigate = useNavigate();
   const initialValues = {
     OldPassword: "",

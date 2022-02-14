@@ -13,14 +13,14 @@ import Spiner from "../Spiner/Spiner";
 const EditProfile = (props) => {
   const [showSpiner, setShowSpiner] = useState(false);
   const { ApiService } = props;
-  const { userProdileInfo } = useSelector((store) => store.login);
+  const { userProfileInfo } = useSelector((store) => store.login);
   const { user } = useSelector((store) => store.infoUser);
   const navigator = useNavigate();
   const dispatch = useDispatch();
 
   const fetchUser = async () => {
     setShowSpiner(true);
-    await ApiService.getUserById(userProdileInfo.id).then((response) => {
+    await ApiService.getUserById(userProfileInfo.id).then((response) => {
       const { data } = response;
       dispatch(getUserId({ ...data }));
       setShowSpiner(false);
@@ -33,7 +33,7 @@ const EditProfile = (props) => {
 
   const onSubmit = async () => {
     setShowSpiner(true);
-    await ApiService.updateUser({ ...values, id: userProdileInfo.id });
+    await ApiService.updateUser({ ...values, id: userProfileInfo.id });
     setShowSpiner(false);
     navigator("/adminPanel/profile");
   };
