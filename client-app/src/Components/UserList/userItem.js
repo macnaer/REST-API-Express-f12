@@ -45,21 +45,21 @@ const UserItem = (props) => {
           >
             Info
           </button>
-          {userProfileInfo.Role==="admin"&&<button
+          <button
             type="button"
             className="btn btn-warning m-2"
             onClick={() => navigate(`/adminPanel/editUser/${id}`)}
           >
             Edit
-          </button>}
+          </button>
           
-         {userProfileInfo.Role==="admin"&& <button
+         <button
             onClick={()=>userProfileInfo.Role===`admin`? handleClickOpen():navigate(`/ad`)}
             type="button"
             className="btn btn-danger m-2"
           >
             Delete
-          </button>}
+          </button>
         </td>
       </tr>
 

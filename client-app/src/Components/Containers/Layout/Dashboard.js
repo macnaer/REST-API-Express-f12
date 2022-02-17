@@ -51,7 +51,7 @@ function DashBoard(props) {
 
   const drawer = (
     <div>
-      <AppBar
+     <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% )` },
@@ -62,14 +62,14 @@ function DashBoard(props) {
       </AppBar>
       <Toolbar />
       <Divider />
-      <List>
+     {userProfileInfo.Role==="admin"&& <List>
         <ListItem
           button
           onClick={() => {
             navigate("/adminpanel/userList");
           }}
         >
-          <ListItemIcon></ListItemIcon>
+          <ListItemIcon/>
           <ListItemText primary={"UserList"} />
         </ListItem>
 
@@ -79,33 +79,32 @@ function DashBoard(props) {
             navigate("/adminpanel/register");
           }}
         >
-          <ListItemIcon></ListItemIcon>
+          <ListItemIcon/>
           <ListItemText primary={"Create User"} />
         </ListItem>
 
-        {
-          userProfileInfo.Role === 'admin' &&
+        
           <ListItem
             button
             onClick={() => {
               navigate("/adminpanel/Role");
             }}
           >
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon/>
             <ListItemText primary={"Role"} />
           </ListItem>
-        }
-      </List>
+        
+      </List>}
       <Divider />
     </div>
-  );
+  )
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+      <CssBaseline /> 
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
