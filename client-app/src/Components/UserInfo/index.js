@@ -17,13 +17,18 @@ const UserInfo = (props) => {
 
   const { Name, Surname, Email, Role } = user;
 	return (
-    <>
-      <h2>USER INFO</h2>
-      <p>Name: {Name}</p>
-      <p>Surname: {Surname}</p>
-      <p>Email: {Email}</p>
-      <p>Role: {Role}</p>
-    </>
+     <div className="container">
+       <div className="row">
+        <div className="row col-4"></div>
+          <div className="col-4 row border border-secondary rounded-3 bg-primary text-dark bg-opacity-10 shadow-lg mb-3 fs-2">
+           <h2 className="fw-bold mt-2 text-center">USER INFO</h2>
+           <p>Name: {Name}</p>
+           <p>Surname: {Surname}</p>
+           <p>Email: {Email}</p>
+           <p>Role: {Role}</p>
+          </div>
+        </div>
+     </div>
   );
 };
 

@@ -33,7 +33,9 @@ const EditProfile = (props) => {
 
   const onSubmit = async () => {
     setShowSpiner(true);
-    await ApiService.updateUser({ ...values, id: userProfileInfo.id });
+    console.log("start user update =>")
+    await ApiService.updateUserInfo({ ...values, id: userProfileInfo.id });
+    console.log("update finish")
     setShowSpiner(false);
     navigator("/adminPanel/profile");
   };

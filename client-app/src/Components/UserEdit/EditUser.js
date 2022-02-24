@@ -48,13 +48,13 @@ const formik = useFormik({
  
 
     return(
-        <>
-        <div className="container">
-      <h1>Edit user</h1>
+      <>
+      <div className="container">
       <div className="row">
         <div className="col-4"></div>
         <FormikProvider value={formik}>
-          <Form onSubmit={handleSubmit} className="col-4">
+          <Form onSubmit={handleSubmit} className="col-4 row border border-secondary rounded-3 bg-primary text-dark bg-opacity-10 shadow-lg mb-3">
+              <h1 className="fw-bold mt-2 text-center">Edit user</h1>
               <InputGroup
               field="Name"
               label="Name"
@@ -92,8 +92,7 @@ const formik = useFormik({
         <div className="col-4"></div>
       </div>
     </div>
-
-        </>
+</>
     );
 
 };

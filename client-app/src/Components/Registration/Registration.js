@@ -3,6 +3,7 @@ import InputGroup from "../Containers/InputGroup";
 import { useFormik, Form, FormikProvider } from "formik";
 import Button from "react-bootstrap/Button";
 import { validationSchema } from "./validation";
+import {useNavigate} from 'react-router-dom'
 
 //select
 import Box from "@mui/material/Box";
@@ -29,6 +30,7 @@ const Registration = (props) => {
   const classes = useStyles();
   const { ApiService } = props;
 
+  const navigate = useNavigate()
 
   const initialValues = {
     Name: "",
@@ -41,19 +43,11 @@ const Registration = (props) => {
 
 
 
-  const onSubmit = (values) => {
+  const onSubmit = () => {
 
 
-    const user = {
-      Name: values.Name,
-      Surname: values.Surname,
-      Email: values.Email,
-      Role: values.Role,
-      Password: values.Password
-    }
-    console.log(user)
 
-    ApiService.register(user).then(res => {
+    ApiService.register(values).then(res => {
       // console.log('respons', res)
       const { data, status } = res
       if (status != undefined && status === 400) {
@@ -62,6 +56,8 @@ const Registration = (props) => {
       else {
         console.log("Profile successfully created")
         console.log(data);
+        navigate('/login')
+
       }
     })
   }
@@ -81,8 +77,8 @@ const Registration = (props) => {
         <div className="row">
           <div className="col-4"></div>
           <FormikProvider value={formik}>
-            <Form onSubmit={handleSubmit} className="col-4">
-              <h1>Реєстрація</h1>
+            <Form onSubmit={handleSubmit} className="col-4 row border border-secondary rounded-3 bg-primary text-dark bg-opacity-10 shadow-lg mb-3">
+              <h1 className="text-center">Реєстрація</h1>
               <InputGroup
                 field="Name"
                 label="Name"
@@ -152,7 +148,7 @@ const Registration = (props) => {
                 </FormControl>
               </Box>
               <div className="row d-flex justify-content-around">
-                <Button className={classes.marTop} type="submit" variant="secondary col-4">
+                <Button className={classes.marTop} type="submit" variant="secondary col-5 mb-2 mx-auto">
                   Login
                 </Button>
               </div>

@@ -19,7 +19,7 @@ const UserList = (props) => {
   return (
     <>
       <h2>UserList</h2>
-      <table class="table align-middle table-hover">
+      <table className="table align-middle table-hover bg-light text-dark">
         <thead>
           <tr>
             <th scope="col">Id</th>

@@ -19,7 +19,8 @@ const User = {
   createUser: (user) => requests.post(`/users/create-user`, user),
   updatePassword: (data) => requests.put("/users/updatePassword", data),
   updateUserInfo: (data) => requests.put("/users/", data),
-  deleteUser: (id) => requests.del(`/users/${id}`)
+  deleteUser: (id) => requests.del(`/users/${id}`),
+
 };
 
 export default class ApiService {
@@ -87,7 +88,5 @@ export default class ApiService {
   async updateUserInfo(dataUser) {
     const data = await User.updateUserInfo(dataUser);
   }
-  async updateUser(userData) {
-    const data = await User.updateUser(userData);
-  }
+  
 }

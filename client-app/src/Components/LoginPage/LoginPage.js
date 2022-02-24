@@ -51,14 +51,17 @@ const LoginPage = (props) => {
   const { touched, errors, values, handleChange, handleSubmit, setFieldError } =
     formik;
 
+
+    console.log('values => ', values)
+    
   return (
     <div className="container">
       {showLoader && <Spiner />}
       <h1>Login</h1>
-      <div className="row">
-        <div className="col-4"></div>
+      <div className="row ">
+        <div className="col-4 "></div>
         <FormikProvider value={formik}>
-          <Form onSubmit={handleSubmit} className="col-4">
+          <Form onSubmit={handleSubmit} className="col-4 row border border-secondary rounded-3 bg-primary text-dark bg-opacity-10 shadow-lg">
             <InputGroup
               field="Email"
               label="Email"
@@ -77,12 +80,15 @@ const LoginPage = (props) => {
               value={values.Password}
               onChange={handleChange}
             />
-            <div className="row d-flex justify-content-around">
-              <Button type="submit" variant="secondary col-4">
+            <div className="row d-flex justify-content-around ps-4">
+              <Button type="submit" variant="secondary col-4 border border-2">
                 Login
               </Button>
-              <Link className="btn btn-secondary col-4" to="/">
+              <Link className="btn btn-secondary col-4 border border-2" to="/">
                 Back to Main
+              </Link>
+              <Link className="btn btn-secondary col-4 border border-2" to="/register">
+                Registration
               </Link>
             </div>
           </Form>

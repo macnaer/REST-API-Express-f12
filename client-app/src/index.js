@@ -52,6 +52,7 @@ const App = () => {
             <Route path="/" element={<DefaultLayout />}>
               <Route path="/" exact element={<Main />} />
               <Route path="/login" element={<LoginPage />} />
+               <Route path="/register" element={<Registration />} />
             </Route>
 
             <Route path="/adminPanel" element={<Dashboard />}>
@@ -75,8 +76,8 @@ const App = () => {
           <Routes>
             <Route path="/admin/dashboard" exact element={<DashBoard />} />
             <Route path="/" exact element={<DashBoard />} />
-            <Route path="/register" element={<Registration />} />
-            <Route path="/login" element={<LoginPage />} />
+            {/* <Route path="/register" element={<Registration />} /> */}
+            {/* <Route path="/login" element={<LoginPage />} /> */}
           </Routes>
         </Router>
       </ApiStoreServiceProvider>
